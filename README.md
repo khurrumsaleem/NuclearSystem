@@ -5,7 +5,7 @@ All library source cords and example models are licensed with GPL v3.
 
 ## Purpose & Usage
 This is Modelica library package for simulation of nuclear power systems and nuclear related devices.
-* 6Dof-rigid-body simulation components are not build yet, planned so far.
+
 
 ## Documentation
 
