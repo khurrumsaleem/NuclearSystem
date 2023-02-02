@@ -7,7 +7,7 @@ model FissionExplosionDeviceCore_ex01_v001
   /******************************
       Parameters
       ******************************/
-  parameter Real NcoreInit = (143*9.48*10^20)*10^6 "neutron number density, []";
+  parameter Real NcoreInit = 1/(4/3*Modelica.Constants.pi) "neutron number density, []";
   parameter Real nInit = 0.1811*10^6*6.02214606*10^23/0.23504393 "nuclear number density, [num/m3]";
   parameter Real RthreshBare = 8.4/100 "";
   parameter units.Area sigmaF_par = 1.199*10^(-28) "";
@@ -88,5 +88,5 @@ equation
   der(vCoreExp) = 4*Modelica.Constants.pi*r^2*gamma*Eemit/(volCore*mCore);
   Eemit_TNTeq = Eemit/(4.184*10^9);
   annotation(
-    experiment(StartTime = 0, StopTime = 1e-08, Tolerance = 1e-06, Interval = 1e-11));
+    experiment(StartTime = 0, StopTime = 1e-06, Tolerance = 1e-06, Interval = 1e-10));
 end FissionExplosionDeviceCore_ex01_v001;
