@@ -7,7 +7,7 @@ model FissionExplosionDeviceCore_ex01_v001
   /******************************
       Parameters
       ******************************/
-  parameter Real NcoreInit = 1/(4/3*Modelica.Constants.pi) "neutron number density, []";
+  parameter Real NcoreInit = 1/(4/3*Modelica.Constants.pi*rInit_par^3) "neutron number density, []";
   parameter Real nInit = 0.1811*10^6*6.02214606*10^23/0.23504393 "nuclear number density, [num/m3]";
   parameter Real RthreshBare = 8.4/100 "";
   parameter units.Area sigmaF_par = 1.199*10^(-28) "";
@@ -34,7 +34,7 @@ model FissionExplosionDeviceCore_ex01_v001
   Real n "nuclear number density";
   Real lambdaCoreFiss "mean free path for neutrons btwn fissions";
   Real alpha "separation of variables in solving diffusion equation";
-  Real r(start = RthreshBare) "";
+  units.Length r "";
   units.Pressure pCore "";
   units.Velocity vCoreExp "";
   Real gamma "";
@@ -60,6 +60,7 @@ protected
     HideResult = false);
 initial equation
   r = rInit_par;
+  rInit= rInit_par;
   volCoreInit = 4.0/3.0*rInit_par^3.0;
   mCore = rhoCore*volCore;
 //Eemit = (NcoreInit*volCore*Efiss/tau);
