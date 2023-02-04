@@ -20,6 +20,10 @@ model FissionExplosionDeviceCore_ex01_v001
   parameter units.Length rInit_par = 7/100;
   parameter units.Density rhoCore = 18.71*1000 "";
   parameter Real mMolar = 235.04393 "molar mass";
+  parameter units.Time tDet_par=0.0e-7 "detonation timing";
+  parameter units.Pressure pCoreInit=100*1000 "initial core pressure";
+  
+  
   /******************************
       Variables
       ******************************/
@@ -44,6 +48,9 @@ model FissionExplosionDeviceCore_ex01_v001
   Real dVoldt "";
   Real nNuke;
   Real Eemit_TNTeq;
+  Real FissRate "rate of fission, times/sec";
+  Real nCumFiss "cumulative number of fissions";
+  units.Time tAfterDet "time after detonation";
   /*
       Real Ncore "number density of neutron";
       discrete Real alphaDes "";
@@ -58,13 +65,24 @@ protected
     HideResult = false);
   parameter units.Mass mCore(fixed = false) "" annotation(
     HideResult = false);
+  parameter units.Time tDet(fixed=false) "time of detonation" annotation(
+    HideResult = false);
+  
 initial equation
   r = rInit_par;
   rInit= rInit_par;
   volCoreInit = 4.0/3.0*rInit_par^3.0;
   mCore = rhoCore*volCore;
-//Eemit = (NcoreInit*volCore*Efiss/tau);
+  tDet=tDet_par;
+  pCore= pCoreInit;
+  
 equation
+  if(time<=tDet)then
+    tAfterDet=0.0;
+  else
+    tAfterDet=time-tDet;
+  end if;
+  //---
   nNuke = nInit*(4/3*rInit_par^3);
   n = nNuke/volCore;
 //-----
@@ -82,12 +100,16 @@ equation
   dCore = sqrt((lambdaCoreFiss*lambdaCoreTrans)/(3.0*(-alpha + nu - 1.0)));
   (r/dCore)*1.0/tan(r/dCore) + (3*dCore/(2.0*lambdaCoreTrans))*(r/dCore) - 1.0 = 0.0;
   pCore = gamma*Eemit/volCore;
-  der(Eemit) = (NcoreInit*volCore*Efiss/tau)*exp((alpha/tau)*time);
+  der(Eemit) = (NcoreInit*volCore*Efiss/tau)*exp((alpha/tau)*tAfterDet);
   der(EkCore) = dVoldt*pCore;
   der(r) = vCoreExp;
   der(volCore) = dVoldt;
   der(vCoreExp) = 4*Modelica.Constants.pi*r^2*gamma*Eemit/(volCore*mCore);
   Eemit_TNTeq = Eemit/(4.184*10^9);
+  FissRate=(NcoreInit*volCore/tau)*exp((alpha/tau)*tAfterDet);
+  der(nCumFiss)= FissRate;
+  
+  
   annotation(
     experiment(StartTime = 0, StopTime = 1e-06, Tolerance = 1e-06, Interval = 1e-10));
 end FissionExplosionDeviceCore_ex01_v001;
