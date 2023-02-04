@@ -4,18 +4,19 @@ model FissionExplosionDeviceCore_ex01_v001
   extends Modelica.Icons.Example;
   //******************************
   import units = Modelica.Units.SI;
+  import conv= NuclearSystem.Constants.UnitConversions;
   /******************************
       Parameters
       ******************************/
   parameter Real NcoreInit = 1/(4/3*Modelica.Constants.pi*rInit_par^3) "neutron number density, []";
-  parameter Real nInit = 0.1811*10^6*6.02214606*10^23/0.23504393 "nuclear number density, [num/m3]";
+  parameter Real nInit = 0.1811*10^6*conv.factor_mole2num()/0.23504393 "nuclear number density, [num/m3]";
   parameter Real RthreshBare = 8.4/100 "";
   parameter units.Area sigmaF_par = 1.199*10^(-28) "";
   parameter units.Area sigmaEl_par = 3.650*10^(-28) "";
   parameter Real nu_par = 2.43 "2.43 for U235";
-  parameter units.Velocity vNeutron_par = 1.4*10^7;
+  parameter units.Velocity vNeutron_par = CmnConsts.vNeuFree_Fission_1MeV;
   parameter Real alphaInit_par = 0.0;
-  parameter units.Energy Efiss = 180*10^6*1.602176634*10^(-19);
+  parameter units.Energy Efiss = 180*10^6*conv.factor_eV2J();
   parameter Real gamma_par = 1/3;
   parameter units.Length rInit_par = 7/100;
   parameter units.Density rhoCore = 18.71*1000 "";
@@ -57,6 +58,13 @@ model FissionExplosionDeviceCore_ex01_v001
       discrete Real RC "core radius";
       
       */
+  
+  
+  /******************************
+      Internal objects
+  ******************************/
+  NuclearSystem.Constants.Common CmnConsts;
+  
 protected
   //parameter Real nNuke(fixed=false) annotation(HideResult=false);
   parameter Real volCoreInit(fixed = false) annotation(
