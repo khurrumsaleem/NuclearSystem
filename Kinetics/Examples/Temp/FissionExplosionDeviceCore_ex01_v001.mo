@@ -37,7 +37,8 @@ model FissionExplosionDeviceCore_ex01_v001
   units.Volume volCore "";
   Real n "nuclear number density";
   Real lambdaCoreFiss "mean free path for neutrons btwn fissions";
-  Real alpha "separation of variables in solving diffusion equation";
+  Real alphaTemp(min=0.0) "separation of variables in solving diffusion equation";
+  Real alpha(min=0.0) "separation of variables in solving diffusion equation";
   units.Length r "";
   units.Pressure pCore "";
   units.Velocity vCoreExp "";
@@ -78,12 +79,21 @@ initial equation
   mCore = rhoCore*volCore;
   tDet = tDet_par;
   pCore = pCoreInit;
+
+algorithm
+  /*when(alpha<=0)then
+    alpha:=0;
+  end when;
+  */
+
 equation
   if (time <= tDet) then
     tAfterDet = 0.0;
   else
     tAfterDet = time - tDet;
   end if;
+  
+  
 //---
   nNuke = nInit*(4/3*Modelica.Constants.pi*rInit_par^3);
   n = nNuke/volCore;
@@ -99,8 +109,17 @@ equation
   lambdaCoreFiss = 1.0/(sigmaF*n);
   lambdaCoreTrans = 1.0/(sigmaT*n);
   tau = lambdaCoreFiss/vNeutron;
-  dCore = sqrt((lambdaCoreFiss*lambdaCoreTrans)/(3.0*(-alpha + nu - 1.0)));
+  
+  //-----
+  dCore = sqrt((lambdaCoreFiss*lambdaCoreTrans)/(3.0*(-alphaTemp + nu - 1.0)));
   (r/dCore)*1.0/tan(r/dCore) + (3*dCore/(2.0*lambdaCoreTrans))*(r/dCore) - 1.0 = 0.0;
+  //-----
+  if(alphaTemp<=0)then
+    alpha=0.0;
+  else
+    alpha= alphaTemp;
+  end if;
+  //-----
   pCore = gamma*Eemit/volCore;
   der(Eemit) = (NcoreInit*volCore*Efiss/tau)*exp((alpha/tau)*tAfterDet);
   der(EkCore) = dVoldt*pCore;
