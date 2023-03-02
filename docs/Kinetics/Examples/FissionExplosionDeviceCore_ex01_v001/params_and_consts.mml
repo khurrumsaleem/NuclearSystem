@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+ <semantics>
+  <mtable>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>N</mi>
+       <mn>0</mn>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">initial</mi>
+      <mi mathvariant="italic">neutron</mi>
+      <mi mathvariant="italic">number</mi>
+      <mi mathvariant="italic">density</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>1</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>E</mi>
+       <mi mathvariant="italic">fiss</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">energy</mi>
+      <mi mathvariant="italic">released</mi>
+      <mi mathvariant="italic">by</mi>
+      <mi mathvariant="italic">single</mi>
+      <mi mathvariant="italic">fission</mi>
+      <mi mathvariant="italic">reaction</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>2</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <mi>γ</mi>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">pressure</mi>
+      <mi mathvariant="italic">parameter</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>3</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <mi>ν</mi>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">secondary</mi>
+      <mi mathvariant="italic">neutrons</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>4</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>σ</mi>
+       <mi>f</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">fission</mi>
+      <mi mathvariant="italic">cross</mi>
+      <mi mathvariant="italic">section</mi>
+      <mi mathvariant="italic">of</mi>
+      <mi mathvariant="italic">fissile</mi>
+      <mi mathvariant="italic">material</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>5</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>σ</mi>
+       <mi mathvariant="italic">el</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mrow>
+       <mi mathvariant="italic">elastic</mi>
+       <mo stretchy="false">−</mo>
+       <mi mathvariant="italic">scattering</mi>
+      </mrow>
+      <mi mathvariant="italic">cross</mi>
+      <mi mathvariant="italic">section</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>6</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>n</mi>
+       <mn>0</mn>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">initial</mi>
+      <mi mathvariant="italic">nuclear</mi>
+      <mi mathvariant="italic">number</mi>
+      <mi mathvariant="italic">density</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>7</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>r</mi>
+       <mn>0</mn>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">initial</mi>
+      <mi mathvariant="italic">core</mi>
+      <mi mathvariant="italic">radius</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>8</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>v</mi>
+       <mi mathvariant="italic">neut</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">average</mi>
+      <mi mathvariant="italic">neutron</mi>
+      <mi mathvariant="italic">speed</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>9</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+  </mtable>
+  <annotation encoding="StarMath 5.0">N_0: initial neutron number density dotsaxis [1] newline
+E_fiss: energy released by single fission reaction dotsaxis [2] newline
+γ: pressure parameter dotsaxis [3] newline
+ν: secondary neutrons dotsaxis [4] newline
+σ_f: fission cross section of fissile material  dotsaxis [5]  newline
+σ_el: elastic-scattering cross section   dotsaxis [6]  newline
+n_0: initial nuclear number density dotsaxis [7]  newline
+r_0: initial core radius  dotsaxis [8]  newline
+v_neut: average neutron speed dotsaxis [9]  
+</annotation>
+ </semantics>
+</math>

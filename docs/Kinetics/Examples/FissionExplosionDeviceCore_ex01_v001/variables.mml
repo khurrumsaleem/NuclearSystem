@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+ <semantics>
+  <mtable>
+   <mtr>
+    <mtd>
+     <mrow>
+      <mi>E</mi>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">cumulative</mi>
+      <mi mathvariant="italic">nergy</mi>
+      <mi mathvariant="italic">released</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>1</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>V</mi>
+       <mi mathvariant="italic">core</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">core</mi>
+      <mi mathvariant="italic">volume</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>2</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>v</mi>
+       <mi mathvariant="italic">core</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">speed</mi>
+      <mi mathvariant="italic">of</mi>
+      <mi mathvariant="italic">core</mi>
+      <mi mathvariant="italic">expansion</mi>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <mi>τ</mi>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">average</mi>
+      <mi mathvariant="italic">time</mi>
+      <mi mathvariant="italic">neutron</mi>
+      <mi mathvariant="italic">will</mi>
+      <mi mathvariant="italic">travel</mi>
+      <mi mathvariant="italic">before</mi>
+      <mi mathvariant="italic">causing</mi>
+      <mi mathvariant="italic">fission</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>3</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <mi>α</mi>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">criticality</mi>
+      <mi mathvariant="italic">parameter</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>4</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <mi>r</mi>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">radius</mi>
+      <mi mathvariant="italic">of</mi>
+      <mi mathvariant="italic">core</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>5</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>p</mi>
+       <mi mathvariant="italic">core</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">pressure</mi>
+      <mi mathvariant="italic">of</mi>
+      <mi mathvariant="italic">core</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>6</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>d</mi>
+       <mi mathvariant="italic">core</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">critical</mi>
+      <mi mathvariant="italic">radius</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>7</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>λ</mi>
+       <mrow>
+        <mi mathvariant="italic">core</mi>
+        <mi mathvariant="italic">fiss</mi>
+       </mrow>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">mean</mi>
+      <mi mathvariant="italic">free</mi>
+      <mi mathvariant="italic">path</mi>
+      <mi mathvariant="italic">between</mi>
+      <mi mathvariant="italic">fissions</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>8</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>λ</mi>
+       <mrow>
+        <mi mathvariant="italic">core</mi>
+        <mi mathvariant="italic">trans</mi>
+       </mrow>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">transport</mi>
+      <mi mathvariant="italic">mean</mi>
+      <mi mathvariant="italic">free</mi>
+      <mi mathvariant="italic">path</mi>
+      <mi mathvariant="italic">for</mi>
+      <mi mathvariant="italic">neutrons</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>9</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>σ</mi>
+       <mi>t</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">transport</mi>
+      <mi mathvariant="italic">cross</mi>
+      <mi mathvariant="italic">section</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>10</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <mi>n</mi>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">nuclear</mi>
+      <mi mathvariant="italic">number</mi>
+      <mi mathvariant="italic">density</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>11</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>n</mi>
+       <mi mathvariant="italic">nuke</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">number</mi>
+      <mi mathvariant="italic">of</mi>
+      <mi mathvariant="italic">nucleous</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>12</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+   <mtr>
+    <mtd>
+     <mrow>
+      <msub>
+       <mi>K</mi>
+       <mi mathvariant="italic">core</mi>
+      </msub>
+      <mi mathvariant="normal">:</mi>
+      <mi mathvariant="italic">kinetic</mi>
+      <mi mathvariant="italic">energy</mi>
+      <mi mathvariant="italic">of</mi>
+      <mi mathvariant="italic">core</mi>
+      <mo stretchy="false">⋯</mo>
+      <mrow>
+       <mo fence="true" form="prefix" stretchy="false">[</mo>
+       <mrow>
+        <mn>13</mn>
+       </mrow>
+       <mo fence="true" form="postfix" stretchy="false">]</mo>
+      </mrow>
+     </mrow>
+    </mtd>
+   </mtr>
+  </mtable>
+  <annotation encoding="StarMath 5.0">E: cumulative nergy released dotsaxis [1]  newline
+V_core: core volume dotsaxis [2]  newline
+v_core: speed of core expansion  newline
+τ: average time neutron will travel before causing fission dotsaxis [3]  newline 
+α: criticality parameter dotsaxis [4]  newline
+r: radius of core dotsaxis [5]  newline
+p_core: pressure of core dotsaxis [6]  newline
+d_core: critical radius  dotsaxis [7]  newline
+λ_{core fiss}: mean free path between fissions   dotsaxis [8]  newline
+λ_{core trans}: transport mean free path for neutrons   dotsaxis [9]  newline
+σ_t: transport cross section  dotsaxis [10]  newline
+n: nuclear number density dotsaxis [11]  newline
+n_nuke: number of nucleous   dotsaxis [12]  newline
+K_core: kinetic energy of core  dotsaxis [ 13 ]  
+</annotation>
+ </semantics>
+</math>
