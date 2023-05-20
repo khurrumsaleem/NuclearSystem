@@ -1,13 +1,13 @@
-within NuclearSystem.Kinetics.Examples;
+within NuclearSystem.Kinetics.Examples.Test;
 
-model FissionExplosionDeviceCore_ex01_v001
+model ExtremeFastFissionDeviceCore_ex01_v001
   extends Modelica.Icons.Example;
   //******************************
   import units = Modelica.Units.SI;
   import conv = NuclearSystem.Constants.UnitConversions;
   /******************************
-                Parameters
-                ******************************/
+              Parameters
+              ******************************/
   parameter Real nNeutInit = 1;
   parameter Real NcoreInit = nNeutInit/(4/3*Modelica.Constants.pi*rInit_par^3) "neutron number density, []";
   parameter Real nInit = 0.1811*10^6*conv.factor_mole2num()/0.23504393 "nuclear number density, [num/m3]";
@@ -25,8 +25,8 @@ model FissionExplosionDeviceCore_ex01_v001
   parameter units.Time tDet_par = 0.0e-7 "detonation timing";
   parameter units.Pressure pCoreInit = 100*1000 "initial core pressure";
   /******************************
-                Variables
-                ******************************/
+              Variables
+              ******************************/
   Real dCore "size of critical radius";
   Real lambdaCoreTrans "transport mean free path for neutrons";
   Real sigmaF "fission cross-section of fissile core material";
@@ -53,14 +53,14 @@ model FissionExplosionDeviceCore_ex01_v001
   Real nCumFiss "cumulative number of fissions";
   units.Time tAfterDet "time after detonation";
   /*
-                Real Ncore "number density of neutron";
-                discrete Real alphaDes "";
-                discrete Real RC "core radius";
-                
-                */
+              Real Ncore "number density of neutron";
+              discrete Real alphaDes "";
+              discrete Real RC "core radius";
+              
+              */
   /******************************
-                Internal objects
-            ******************************/
+              Internal objects
+          ******************************/
   NuclearSystem.Constants.Common CmnConsts;
 protected
   //parameter Real nNuke(fixed=false) annotation(HideResult=false);
@@ -128,4 +128,4 @@ equation
   der(nCumFiss) = FissRate;
   annotation(
     experiment(StartTime = 0, StopTime = 1e-06, Tolerance = 1e-06, Interval = 1e-10));
-end FissionExplosionDeviceCore_ex01_v001;
+end ExtremeFastFissionDeviceCore_ex01_v001;
