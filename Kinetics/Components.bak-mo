@@ -1,0 +1,12 @@
+within NuclearSystem.Kinetics;
+
+model Components
+  extends Modelica.Icons.Package;
+
+  model PointKineticReactor_onlyPromptNeutron_00
+  equation
+
+  end PointKineticReactor_onlyPromptNeutron_00;
+equation
+
+end Components;

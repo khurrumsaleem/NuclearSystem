@@ -10,6 +10,7 @@ model FissionExplosionDeviceCore_ex01_v001
                 ******************************/
   parameter Real nNeutInit = 1;
   parameter Real NcoreInit = nNeutInit/(4/3*Modelica.Constants.pi*rInit_par^3) "neutron number density, []";
+  parameter Real kNnukDen=1.0 "multiplication factor onto nuclear number density";
   parameter Real nInit = 0.1811*10^6*conv.factor_mole2num()/0.23504393 "nuclear number density, [num/m3]";
   parameter Real RthreshBare = 8.4/100 "";
   parameter units.Area sigmaF_par = 1.199*10^(-28) "";
@@ -92,7 +93,7 @@ equation
     tAfterDet = time - tDet;
   end if;
 //---
-  nNuke = nInit*(4/3*Modelica.Constants.pi*rInit_par^3);
+  nNuke = kNnukDen* nInit*(4/3*Modelica.Constants.pi*rInit_par^3);
   n = nNuke/volCore;
 //-----
   sigmaF = sigmaF_par;
