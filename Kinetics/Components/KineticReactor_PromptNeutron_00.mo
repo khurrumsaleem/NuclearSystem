@@ -50,7 +50,9 @@ model KineticReactor_PromptNeutron_00
   units.Power pwr "power";
   units.Energy engy "";
   Real engy_TNTeq;
-  
+  units.Power pwr0 "pwr at t=0";
+  Real pwrRel0 "pwr/pwr0";
+  units.Time T "characteristic time(or time constant in linear system)";
   
   /*-----------------------------------
   interfaces
@@ -61,9 +63,13 @@ model KineticReactor_PromptNeutron_00
 
 initial equation
   n= n0;
-
-
+  pwr0=pwr;
+  
 equation
+  when(time==0)then
+    pwr0= pwr;
+  end when;
+  
   n0= n0_par;
   Nneu0= n0*Vol;
   
@@ -86,6 +92,13 @@ equation
   pwr= Efiss_par*SIGMAf*PHI*Vol;
   pwr= der(engy);
   engy_TNTeq = engy/(4.184*10^9);
+  pwrRel0=pwr/pwr0;
+  
+  if(0.0<abs(rho))then
+    T= LAMBDA/rho;
+  else
+    T= 0.0;
+  end if;
   
 annotation(
     defaultComponentName = "PtRctr",
