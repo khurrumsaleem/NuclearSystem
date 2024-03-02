@@ -4,11 +4,23 @@ model KineticReactor_PromptNeutron_00_ex01
   extends Modelica.Icons.Example;
   Components.KineticReactor_PromptNeutron_00 PtRctr annotation(
     Placement(transformation(origin = {26, 18}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Sources.Ramp ramp_rho(height = 0.001, duration = 0.01, offset = 0, startTime = 2) annotation(
-    Placement(transformation(origin = {-16, 18}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Interaction.Show.RealValue realValue_pwr(significantDigits = 4)  annotation(
+    Placement(transformation(origin = {69, 14}, extent = {{-17, -9}, {17, 9}})));
+  Modelica.Blocks.Interaction.Show.RealValue realValue_pwr1(significantDigits = 4)  annotation(
+    Placement(transformation(origin = {69, 31}, extent = {{-17, -9}, {17, 9}})));
+  Utilities.keff2rho keff2rho annotation(
+    Placement(transformation(origin = {-6, 18}, extent = {{-6, -6}, {6, 6}})));
+  Modelica.Blocks.Sources.Step step_keff(height = 0.001, offset = 1, startTime = 2) annotation(
+    Placement(transformation(origin = {-40, 18}, extent = {{-10, -10}, {10, 10}})));
 equation
-  connect(ramp_rho.y, PtRctr.u_rho) annotation(
-    Line(points = {{-4, 18}, {16, 18}}, color = {0, 0, 127}));
+  connect(PtRctr.y_pwrRel0, realValue_pwr.numberPort) annotation(
+    Line(points = {{38, 14}, {49, 14}}, color = {0, 0, 127}));
+  connect(PtRctr.y_pwr, realValue_pwr1.numberPort) annotation(
+    Line(points = {{38, 18}, {44, 18}, {44, 31}, {49, 31}}, color = {0, 0, 127}));
+  connect(keff2rho.y_rho, PtRctr.u_rho) annotation(
+    Line(points = {{1, 18}, {16, 18}}, color = {0, 0, 127}));
+  connect(step_keff.y, keff2rho.u_keff) annotation(
+    Line(points = {{-28, 18}, {-13, 18}}, color = {0, 0, 127}));
   annotation(
     experiment(StartTime = 0, StopTime = 3, Tolerance = 1e-06, Interval = 0.0001));
 end KineticReactor_PromptNeutron_00_ex01;
