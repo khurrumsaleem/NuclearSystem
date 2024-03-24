@@ -62,17 +62,17 @@ model KineticReactor_PromptNeutron_00
     Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput y_pwrRel0 annotation(
     Placement(transformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}})));
-//**********************************************************************
+  //**********************************************************************
+  Interface.Bus bus annotation(
+    Placement(transformation(origin = {100, -80}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {100, -90}, extent = {{-10, -10}, {10, 10}})));
 initial equation
   n= n0;
   pwr0=pwr;
-  
 //**********************************************************************
 algorithm
   when(time==0)then
     pwr0:= pwr;
   end when;
-  
 //**********************************************************************
 equation
   n0= n0_par;
@@ -92,8 +92,7 @@ equation
   rho= (kEff-1)/kEff;
   
   LAMBDA=1/(nu*SIGMAf*v);
-  //LAMBDA=1e-4;
-  
+//LAMBDA=1e-4;
   der(n)= (rho/LAMBDA)*n;
   Nneu= n*Vol;
   
