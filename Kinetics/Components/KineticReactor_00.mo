@@ -62,6 +62,7 @@ model KineticReactor_00
   discrete units.NeutronNumberDensity n0;
   discrete Real Nneu0 "initial  num of neutron";
   discrete Real C0[nPrecursor_par];
+  discrete Real rho0;
   //---
   Real pwrRel0 "pwr/pwr0";
   Real nRel0 "n/n0";
@@ -74,11 +75,9 @@ model KineticReactor_00
   units.NeutronNumberDensity lambdaC[nPrecursor_par];
   units.NeutronNumberDensity SIGMA_lambdaC;
   //---
-  Real der_n_term[2];
-  Real der_C_term[nPrecursor_par, 2];
   /*-----------------------------------
       interfaces
-      -----------------------------------*/
+  -----------------------------------*/
   Modelica.Blocks.Interfaces.RealInput u_rho "reactivity input" annotation(
     Placement(transformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput y_pwr(unit = "W", displayUnit = "W") "" annotation(
@@ -92,13 +91,14 @@ initial equation
   pwr0 = pwr;
   LAMBDA0 = LAMBDA;
   Nneu0 = n0*Vol;
-  for i in 1:nPrecursor_par loop
-    C0[i] = beta_par[i]/(lambda_par[i]*LAMBDA0);
-  end for;
-//----
+  //----
+  n0 = n0_par;
+  //----
   n = n0;
   for i in 1:nPrecursor_par loop
     C[i] = C0[i];
+    der(C[i])=0.0;
+    der(n)=0.0;
   end for;
 //**********************************************************************
 algorithm
@@ -113,39 +113,40 @@ equation
   v = v_par;
   Vol = Vol_par;
   
+  //----------
   when (time == 0) then
-    n0 = n0_par;
+    n0 = n;
     //-----
     pwr0 = pwr;
     LAMBDA0 = LAMBDA;
     Nneu0 = n0*Vol;
+    rho0 = rho;
     for i in 1:nPrecursor_par loop
-      C0[i] = beta_par[i]/(lambda_par[i]*LAMBDA0);
+      C0[i]=C[i];
     end for;
   end when;
-  
-//-----
-  SIGMAf = sigmaF_par*(NnukeFuel_par*kFuelDens_par);
+  //----------
   rho = u_rho;
   y_pwr = pwr;
   y_pwrRel0 = pwrRel0;
+  
+  //----------
+  SIGMAf = sigmaF_par*(NnukeFuel_par*kFuelDens_par);
   rho = (kEff - 1)/kEff;
   LAMBDA = 1/(nu*SIGMAf*v);
 //-----
   betaTotal = sum(beta);
   SIGMA_lambdaC = sum(lambdaC);
+  //-
   for i in 1:nPrecursor_par loop
     der(C[i]) = beta[i]/LAMBDA*n - lambda[i]*C[i];
     lambdaC[i] = lambda[i]*C[i];
 //-----
     Crel0[i] = C[i]/C0[i];
-    der_C_term[i, 1] = beta[i]/LAMBDA*n;
-    der_C_term[i, 2] = -lambda[i]*C[i];
+    
   end for;
+  //-
   der(n) = ((rho - betaTotal)/LAMBDA)*n + SIGMA_lambdaC;
-  nRel0 = n/n0;
-  der_n_term[1] = ((rho - betaTotal)/LAMBDA)*n;
-  der_n_term[2] = SIGMA_lambdaC;
 //-----
   Nneu = n*Vol;
   PHI = n*v;
@@ -154,15 +155,18 @@ equation
   
   //-----
   engy_TNTeq = engy/(4.184*10^9);
-  if (0.0 < abs(rho)) then
-    T = LAMBDA/rho;
+  if (0.0 < abs(rho-betaTotal)) then
+    T = LAMBDA/(rho-betaTotal);
   else
     T = 0.0;
   end if;
+  //-----
+  nRel0 = n/n0;
   pwrRel0 = pwr/pwr0;
   rho_dollar= rho/betaTotal;
   rho_cent= rho_dollar*100.0;
   
+  //----------
   annotation(
     defaultComponentName = "PtRctr",
     Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -114}, extent = {{-100, 10}, {100, -10}}, textString = "%name")}),
