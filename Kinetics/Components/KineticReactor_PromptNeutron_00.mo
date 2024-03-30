@@ -29,6 +29,11 @@ model KineticReactor_PromptNeutron_00
   parameter units.Area sigmaF_par=1.199*10^(-28) "microscopic fission cross section";
   parameter units.Velocity v_par=CmnConsts.vNeuFree_Fission_1MeV "neutron velocity";
   //parameter units.Time LAMBDA_par= 0.0001;
+  //-------------------------
+  parameter Boolean use_HeatTransfer = false
+  "= true to use the HeatTransfer model"
+      annotation (Dialog(tab="Assumptions", group="Heat transfer"));
+  
   /*-----------------------------------
   internal objects
   -----------------------------------*/
@@ -59,12 +64,14 @@ model KineticReactor_PromptNeutron_00
   Modelica.Blocks.Interfaces.RealInput u_rho "reactivity input" annotation(
     Placement(transformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput y_pwr(unit = "W", displayUnit = "W") "" annotation(
-    Placement(transformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Interfaces.RealOutput y_pwrRel0 annotation(
     Placement(transformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Interfaces.RealOutput y_pwrRel0 annotation(
+    Placement(transformation(origin = {110, -80}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -80}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if use_HeatTransfer
+    annotation (Placement(transformation(origin = {200, 0}, extent = {{-110, -10}, {-90, 10}}), iconTransformation(origin = {200, 0}, extent = {{-110, -10}, {-90, 10}})));
   //**********************************************************************
   Interface.Bus bus annotation(
-    Placement(transformation(origin = {100, -80}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {100, -90}, extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin = {60, -100}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {60, -100}, extent = {{-10, -10}, {10, 10}})));
 initial equation
   n= n0;
   pwr0=pwr;
@@ -84,11 +91,15 @@ equation
   
   SIGMAf= sigmaF_par*(NnukeFuel_par*kFuelDens_par);
   
+  //------------------------------
   rho= u_rho;
   
   y_pwr= pwr;
   y_pwrRel0= pwrRel0;
   
+  heatPort.Q_flow= -1.0*pwr;
+  
+  //------------------------------
   rho= (kEff-1)/kEff;
   
   LAMBDA=1/(nu*SIGMAf*v);
@@ -113,6 +124,6 @@ equation
   
 annotation(
     defaultComponentName = "PtRctr",
-  Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -114}, extent = {{-100, 10}, {100, -10}}, textString = "%name")}),
+  Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -116}, extent = {{-100, 10}, {100, -10}}, textString = "%name")}),
   experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-6, Interval = 0.002));
 end KineticReactor_PromptNeutron_00;
