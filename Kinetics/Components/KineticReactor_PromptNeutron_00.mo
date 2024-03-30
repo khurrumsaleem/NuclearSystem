@@ -35,8 +35,8 @@ model KineticReactor_PromptNeutron_00
   NuclearSystem.Constants.Common CmnConsts;
   units.NeutronNumberDensity n;
   units.NeutronNumberDensity n0;
-  Real Nneu "num of neutron";
-  Real Nneu0 "initial  num of neutron";
+  Real nNeu "num of neutron";
+  Real nNeu0 "initial  num of neutron";
   units.Time LAMBDA "neutron generation time";
   Real nu "average number of neutrons produced per fission";
   units.MacroscopicCrossSection SIGMAf "macroscopic fission cross section";
@@ -76,7 +76,7 @@ algorithm
 //**********************************************************************
 equation
   n0= n0_par;
-  Nneu0= n0*Vol;
+  nNeu0= nNeu;
   
   nu= nu_par;
   v= v_par;
@@ -93,8 +93,9 @@ equation
   
   LAMBDA=1/(nu*SIGMAf*v);
 //LAMBDA=1e-4;
-  der(n)= (rho/LAMBDA)*n;
-  Nneu= n*Vol;
+  //der(n)= (rho/LAMBDA)*n;
+  der(nNeu)= (rho/LAMBDA)*nNeu;
+  nNeu= n*Vol;
   
   PHI=n*v;
   

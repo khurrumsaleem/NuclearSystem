@@ -26,22 +26,13 @@ model KineticReactor_00
   parameter Integer nPrecursor_par = 6 "";
   parameter Real beta_par[nPrecursor_par] = {0.000215, 0.001424, 0.001274, 0.002568, 0.000748, 0.000273};
   parameter units.DecayConstant lambda_par[nPrecursor_par] = {0.0126, 0.0337, 0.139, 0.325, 1.13, 3.5};
-  /*
-    units.NeutronNumberDensity C0_par[nPrecursor_par]={
-      beta_par[1]/(lambda_par[1]*0.001), 
-      beta_par[2]/(lambda_par[2]*0.001), 
-      beta_par[3]/(lambda_par[3]*0.001), 
-      beta_par[4]/(lambda_par[4]*0.001), 
-      beta_par[5]/(lambda_par[5]*0.001), 
-      beta_par[6]/(lambda_par[6]*0.001)
-    };
-    */
+  
   /*-----------------------------------
       internal objects
       -----------------------------------*/
   NuclearSystem.Constants.Common CmnConsts;
   units.NeutronNumberDensity n;
-  Real Nneu "num of neutron";
+  Real nNeu "num of neutron";
   units.Time LAMBDA "neutron generation time";
   Real nu "average number of neutrons produced per fission";
   units.MacroscopicCrossSection SIGMAf "macroscopic fission cross section";
@@ -60,8 +51,9 @@ model KineticReactor_00
   discrete units.Power pwr0 "pwr at t=0";
   discrete units.Time LAMBDA0 "neutron generation time, at time=0";
   discrete units.NeutronNumberDensity n0;
-  discrete Real Nneu0 "initial  num of neutron";
+  discrete Real nNeu0 "initial  num of neutron";
   discrete Real C0[nPrecursor_par];
+  discrete Real nC0[nPrecursor_par];
   discrete Real rho0;
   //---
   Real pwrRel0 "pwr/pwr0";
@@ -70,10 +62,13 @@ model KineticReactor_00
   //---
   Real beta[nPrecursor_par];
   Real betaTotal;
-  Real C[nPrecursor_par];
+  Real C[nPrecursor_par] "precursor density";
+  Real nC[nPrecursor_par] "number of precursor";
   units.DecayConstant lambda[nPrecursor_par];
   units.NeutronNumberDensity lambdaC[nPrecursor_par];
+  Real lambdaNC[nPrecursor_par];
   units.NeutronNumberDensity SIGMA_lambdaC;
+  Real SIGMA_lambdaNC;
   //---
   /*-----------------------------------
       interfaces
@@ -90,7 +85,7 @@ model KineticReactor_00
 initial equation
   pwr0 = pwr;
   LAMBDA0 = LAMBDA;
-  Nneu0 = n0*Vol;
+  nNeu0 = n0*Vol;
   //----
   n0 = n0_par;
   //----
@@ -119,10 +114,11 @@ equation
     //-----
     pwr0 = pwr;
     LAMBDA0 = LAMBDA;
-    Nneu0 = n0*Vol;
+    nNeu0 = nNeu;
     rho0 = rho;
     for i in 1:nPrecursor_par loop
       C0[i]=C[i];
+      nC0[i]=nC[i];
     end for;
   end when;
   //----------
@@ -135,20 +131,23 @@ equation
   rho = (kEff - 1)/kEff;
   LAMBDA = 1/(nu*SIGMAf*v);
 //-----
-  betaTotal = sum(beta);
-  SIGMA_lambdaC = sum(lambdaC);
   //-
   for i in 1:nPrecursor_par loop
-    der(C[i]) = beta[i]/LAMBDA*n - lambda[i]*C[i];
+    der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i];
+    lambdaNC[i] = lambda[i]*nC[i];
     lambdaC[i] = lambda[i]*C[i];
 //-----
     Crel0[i] = C[i]/C0[i];
-    
+    nC[i]= C[i]*Vol;
   end for;
   //-
-  der(n) = ((rho - betaTotal)/LAMBDA)*n + SIGMA_lambdaC;
+  betaTotal = sum(beta);
+  SIGMA_lambdaC = sum(lambdaC);
+  SIGMA_lambdaNC = sum(lambdaNC);
+  
+  der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
 //-----
-  Nneu = n*Vol;
+  nNeu = n*Vol;
   PHI = n*v;
   pwr = Efiss_par*SIGMAf*PHI*Vol;
   pwr = der(engy);
