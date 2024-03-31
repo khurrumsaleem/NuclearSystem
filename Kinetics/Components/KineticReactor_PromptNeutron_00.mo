@@ -71,7 +71,7 @@ model KineticReactor_PromptNeutron_00
     annotation (Placement(transformation(origin = {200, 0}, extent = {{-110, -10}, {-90, 10}}), iconTransformation(origin = {200, 0}, extent = {{-110, -10}, {-90, 10}})));
   //**********************************************************************
   Interface.Bus bus annotation(
-    Placement(transformation(origin = {60, -100}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {60, -100}, extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin = {60, -100}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-80, -100}, extent = {{-10, -10}, {10, 10}})));
 initial equation
   n= n0;
   pwr0=pwr;
