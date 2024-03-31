@@ -1,8 +1,8 @@
 within NuclearSystem.Kinetics.Examples.ComponentUsage;
 
-model KineticReactor_PromptNeutron_00_ex02
+model KineticReactor_00_ex02
   extends Modelica.Icons.Example;
-  Components.KineticReactor_PromptNeutron_00 PtRctr annotation(
+  Components.KineticReactor_00 PtRctr annotation(
     Placement(transformation(origin = {93, 16}, extent = {{-15, -15}, {15, 15}})));
   Modelica.Blocks.Sources.Ramp ramp_tgt_pwrRel0(height = 0, duration = 0.001, offset = 1, startTime = 10) annotation(
     Placement(transformation(origin = {-116, 16}, extent = {{-10, -10}, {10, 10}})));
@@ -68,6 +68,6 @@ equation
   connect(keff2rho.y_rho, sumRho.u[2]) annotation(
     Line(points = {{12, 56}, {46, 56}, {46, 16}, {54, 16}}, color = {0, 0, 127}));
   annotation(
-    experiment(StartTime = 0, StopTime = 20, Tolerance = 1e-06, Interval = 0.001),
+    experiment(StartTime = 0, StopTime = 100, Tolerance = 1e-06, Interval = 0.002),
   Diagram(coordinateSystem(extent = {{-140, -100}, {160, 100}})));
-end KineticReactor_PromptNeutron_00_ex02;
+end KineticReactor_00_ex02;

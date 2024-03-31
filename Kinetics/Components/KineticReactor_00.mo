@@ -133,7 +133,10 @@ equation
   rho = u_rho;
   y_pwr = pwr;
   y_pwrRel0 = pwrRel0;
-  heatPort.Q_flow= -1.0*pwr;
+  
+  if (use_HeatTransfer == true) then
+    heatPort.Q_flow= -1.0*pwr;
+  end if;
 //----------
   SIGMAf = sigmaF_par*(NnukeFuel_par*kFuelDens_par);
   rho = (kEff - 1)/kEff;
