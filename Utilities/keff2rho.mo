@@ -1,6 +1,9 @@
 within NuclearSystem.Utilities;
 
 block keff2rho
+  extends NuclearSystem.Icons.BlankWhite_200x200;
+  
+  
   Modelica.Blocks.Interfaces.RealInput u_keff annotation(
     Placement(transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-110, -2}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput y_rho annotation(
