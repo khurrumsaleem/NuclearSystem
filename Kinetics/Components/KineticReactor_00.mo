@@ -37,6 +37,8 @@ model KineticReactor_00
       internal objects
       -----------------------------------*/
   NuclearSystem.Constants.Common CmnConsts;
+  Real NnukeFuel "num density of nuclear fuel";
+  Real numNukeFuel "num of nuclei";
   units.NeutronNumberDensity n;
   Real nNeu "num of neutron";
   units.Time LAMBDA "neutron generation time";
@@ -116,6 +118,7 @@ equation
   nu = nu_par;
   v = v_par;
   Vol = Vol_par;
+  NnukeFuel= NnukeFuel_par;
 //----------
   when (time == 0) then
     n0 = n;
@@ -158,7 +161,9 @@ equation
   
   der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
 //-----
+  numNukeFuel= NnukeFuel*Vol;
   nNeu = n*Vol;
+  
   PHI = n*v;
   pwr = Efiss_par*SIGMAf*PHI*Vol;
   pwr = der(engy);

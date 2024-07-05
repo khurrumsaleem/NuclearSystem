@@ -38,6 +38,8 @@ model KineticReactor_PromptNeutron_00
   internal objects
   -----------------------------------*/
   NuclearSystem.Constants.Common CmnConsts;
+  Real NnukeFuel "num density of nuclear fuel";
+  Real numNukeFuel "num of nuclei";
   units.NeutronNumberDensity n;
   units.NeutronNumberDensity n0;
   Real nNeu "num of neutron";
@@ -84,11 +86,13 @@ algorithm
 equation
   n0= n0_par;
   nNeu0= nNeu;
-  
+  //----------
   nu= nu_par;
   v= v_par;
   Vol= Vol_par;
+  NnukeFuel= NnukeFuel_par;
   
+  //----------
   SIGMAf= sigmaF_par*(NnukeFuel_par*kFuelDens_par);
   
   //------------------------------
@@ -108,8 +112,9 @@ equation
 //LAMBDA=1e-4;
   //der(n)= (rho/LAMBDA)*n;
   der(nNeu)= (rho/LAMBDA)*nNeu;
+  //----------
   nNeu= n*Vol;
-  
+  numNukeFuel= NnukeFuel*Vol;
   PHI=n*v;
   
   pwr= Efiss_par*SIGMAf*PHI*Vol;
