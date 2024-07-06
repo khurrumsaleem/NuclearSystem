@@ -70,7 +70,7 @@ model KineticReactor_00
   discrete Real numNukeFuel0 "initial num of nuclei";
   //---
   Real pwrRel0 "pwr/pwr0";
-  Real nRel0 "denNeu/denNeu0";
+  Real denNeuRel0 "denNeu/denNeu0";
   Real Crel0[nPrecursor_par] "C/C0";
   Real derNneuqNneu "der(nNeu)/nNeu";
   //---
@@ -203,7 +203,7 @@ equation
   end if;
 //-----
   derNneuqNneu= der(nNeu)/nNeu;
-  nRel0 = denNeu/denNeu0;
+  denNeuRel0 = denNeu/denNeu0;
   pwrRel0 = pwr/pwr0;
   rho_dollar= rho/betaTotal;
   rho_cent= rho_dollar*100.0;
