@@ -18,7 +18,7 @@ model KineticReactor_00
   parameter Real denNeu0_par = 1e14 "initial neutron density";
   parameter units.Volume Vol_par = 1.0;
   parameter Real kFuelDens_par = 0.001 "";
-  parameter Real NnukeFuel_par = 0.05*(19*10^6/238)*conv.factor_mole2num() "nuclear number density, [num/m3]";
+  parameter Real denNnukeFuel_par = 0.05*(19*10^6/238)*conv.factor_mole2num() "nuclear number density, [num/m3]";
   parameter units.Energy Efiss_par = 200*10^6*conv.factor_eV2J();
   parameter Real nu_par = 2.43 "average number of neutrons produced per fission";
   parameter units.Area sigmaF_par = 1.199*10^(-28) "microscopic fission cross section";
@@ -39,7 +39,7 @@ model KineticReactor_00
       internal objects
       -----------------------------------*/
   NuclearSystem.Constants.Common CmnConsts;
-  Real NnukeFuel "num density of nuclear fuel";
+  Real denNnukeFuel "num density of nuclear fuel";
   Real numNukeFuel "num of nuclei";
   units.NeutronNumberDensity denNeu;
   Real nNeu "num of neutron";
@@ -112,7 +112,7 @@ initial equation
   numNukeFuel0= NnukeFuel0*Vol;
 //----
   denNeu0 = denNeu0_par;
-  NnukeFuel0= NnukeFuel_par;
+  NnukeFuel0= denNnukeFuel_par;
 //----
   denNeu = denNeu0;
   for i in 1:nPrecursor_par loop
@@ -149,7 +149,7 @@ equation
     LAMBDA0 = LAMBDA;
     nNeu0 = nNeu;
     rho0 = rho;
-    NnukeFuel0= NnukeFuel;
+    NnukeFuel0= denNnukeFuel;
     numNukeFuel0= numNukeFuel;
     for i in 1:nPrecursor_par loop
       C0[i]=C[i];
@@ -167,7 +167,7 @@ equation
     heatPort.Q_flow= -1.0*pwr;
   end if;
 //----------
-  SIGMAf = sigmaF_par*(NnukeFuel*kFuelDens_par);
+  SIGMAf = sigmaF_par*(denNnukeFuel*kFuelDens_par);
   rho = (kEff - 1)/kEff;
   LAMBDA = 1/(nu*SIGMAf*v);
 //-----
@@ -188,7 +188,7 @@ equation
   der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
 //-----
   numNukeFuel= numNukeFuel0;
-  NnukeFuel= numNukeFuel/Vol;
+  denNnukeFuel= numNukeFuel/Vol;
   nNeu = denNeu*Vol;
   
   PHI = denNeu*v;
