@@ -30,7 +30,9 @@ model KineticReactor_00
   parameter Boolean use_HeatTransfer = false
   "= true to use the HeatTransfer model"
       annotation (Dialog(tab="Assumptions", group="Heat transfer"));
-  
+  parameter Boolean use_u_Vol = false
+  "= true to use Vol input signal"
+      annotation (Dialog(tab="General", group="Switches"));
   
   
   /*-----------------------------------
@@ -43,6 +45,7 @@ model KineticReactor_00
   Real nNeu "num of neutron";
   units.Time LAMBDA "neutron generation time";
   Real nu "average number of neutrons produced per fission";
+  units.Area sigmaF "microscopic fission cross section";
   units.MacroscopicCrossSection SIGMAf "macroscopic fission cross section";
   units.Velocity v "neutron velocity";
   Real rho "reactivity";
@@ -59,14 +62,17 @@ model KineticReactor_00
   discrete units.Power pwr0 "pwr at t=0";
   discrete units.Time LAMBDA0 "neutron generation time, at time=0";
   discrete units.NeutronNumberDensity n0;
-  discrete Real nNeu0 "initial  num of neutron";
+  discrete Real nNeu0 "initial num of neutron";
   discrete Real C0[nPrecursor_par];
   discrete Real nC0[nPrecursor_par];
-  discrete Real rho0;
+  discrete Real rho0 "initial reactivity";
+  discrete Real NnukeFuel0 "num density of nuclear fuel";
+  discrete Real numNukeFuel0 "initial num of nuclei";
   //---
   Real pwrRel0 "pwr/pwr0";
   Real nRel0 "n/n0";
   Real Crel0[nPrecursor_par] "C/C0";
+  Real derNneuqNneu "der(nNeu)/nNeu";
   //---
   Real beta[nPrecursor_par];
   Real betaTotal;
@@ -83,29 +89,38 @@ model KineticReactor_00
   -----------------------------------*/
   Modelica.Blocks.Interfaces.RealInput u_rho "reactivity input" annotation(
     Placement(transformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Interfaces.RealInput u_Vol if use_u_Vol "volume input" annotation(
+    Placement(transformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}})));
+
   Modelica.Blocks.Interfaces.RealOutput y_pwr(unit = "W", displayUnit = "W") "" annotation(
-    Placement(transformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, -40}, extent = {{-5, -5}, {5, 5}})));
   Modelica.Blocks.Interfaces.RealOutput y_pwrRel0 annotation(
-    Placement(transformation(origin = {110, -80}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -80}, extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin = {110, -60}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, -60}, extent = {{-5, -5}, {5, 5}})));
   Interface.Bus bus annotation(
     Placement(transformation(origin = {60, -100}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-80, -100}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if use_HeatTransfer
     annotation (Placement(transformation(origin = {200, 0}, extent = {{-110, -10}, {-90, 10}}), iconTransformation(origin = {200, 0}, extent = {{-110, -10}, {-90, 10}})));
-  
   //**********************************************************************
+  Modelica.Blocks.Interfaces.RealOutput y_der_nNeu annotation(
+    Placement(transformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, 40}, extent = {{-5, -5}, {5, 5}})));
+  Modelica.Blocks.Interfaces.RealOutput y_derNneuqNneu annotation(
+    Placement(transformation(origin = {110, 60}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, 60}, extent = {{-5, -5}, {5, 5}})));
 initial equation
   pwr0 = pwr;
   LAMBDA0 = LAMBDA;
   nNeu0 = n0*Vol;
+  numNukeFuel0= NnukeFuel0*Vol;
 //----
   n0 = n0_par;
+  NnukeFuel0= NnukeFuel_par;
 //----
   n = n0;
   for i in 1:nPrecursor_par loop
     C[i] = C0[i];
     der(C[i])=0.0;
-    der(n)=0.0;
   end for;
+  
+  der(n)=0.0;
 //**********************************************************************
 algorithm
 //**********************************************************************
@@ -117,8 +132,15 @@ equation
   
   nu = nu_par;
   v = v_par;
-  Vol = Vol_par;
-  NnukeFuel= NnukeFuel_par;
+  sigmaF= sigmaF_par;
+  
+  if(use_u_Vol==true)then
+    Vol= u_Vol;
+  else
+    Vol = Vol_par;
+  end if;
+  
+  
 //----------
   when (time == 0) then
     n0 = n;
@@ -127,6 +149,8 @@ equation
     LAMBDA0 = LAMBDA;
     nNeu0 = nNeu;
     rho0 = rho;
+    NnukeFuel0= NnukeFuel;
+    numNukeFuel0= numNukeFuel;
     for i in 1:nPrecursor_par loop
       C0[i]=C[i];
       nC0[i]=nC[i];
@@ -136,12 +160,14 @@ equation
   rho = u_rho;
   y_pwr = pwr;
   y_pwrRel0 = pwrRel0;
+  y_der_nNeu= der(nNeu);
+  y_derNneuqNneu= derNneuqNneu;
   
   if (use_HeatTransfer == true) then
     heatPort.Q_flow= -1.0*pwr;
   end if;
 //----------
-  SIGMAf = sigmaF_par*(NnukeFuel_par*kFuelDens_par);
+  SIGMAf = sigmaF_par*(NnukeFuel*kFuelDens_par);
   rho = (kEff - 1)/kEff;
   LAMBDA = 1/(nu*SIGMAf*v);
 //-----
@@ -161,7 +187,8 @@ equation
   
   der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
 //-----
-  numNukeFuel= NnukeFuel*Vol;
+  numNukeFuel= numNukeFuel0;
+  NnukeFuel= numNukeFuel/Vol;
   nNeu = n*Vol;
   
   PHI = n*v;
@@ -175,6 +202,7 @@ equation
     T = 0.0;
   end if;
 //-----
+  derNneuqNneu= der(nNeu)/nNeu;
   nRel0 = n/n0;
   pwrRel0 = pwr/pwr0;
   rho_dollar= rho/betaTotal;

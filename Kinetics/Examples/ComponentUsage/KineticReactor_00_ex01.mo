@@ -2,7 +2,7 @@ within NuclearSystem.Kinetics.Examples.ComponentUsage;
 
 model KineticReactor_00_ex01
   extends Modelica.Icons.Example;
-  Components.KineticReactor_00 PtRctr(use_HeatTransfer = true) annotation(
+  Components.KineticReactor_00 PtRctr(use_HeatTransfer = true, use_u_Vol = false) annotation(
     Placement(transformation(origin = {2, 6}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Step step_rho(height = 0.000670, offset = 0, startTime = 10) annotation(
     Placement(transformation(origin = {-36, 6}, extent = {{-10, -10}, {10, 10}})));
