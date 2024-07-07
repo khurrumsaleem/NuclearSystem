@@ -40,7 +40,7 @@ model KineticReactor_00
       -----------------------------------*/
   NuclearSystem.Constants.Common CmnConsts;
   Real denNnukeFuel "num density of nuclear fuel";
-  Real numNukeFuel "num of nuclei";
+  Real nNukeFuel "num of nuclei";
   units.NeutronNumberDensity denNeu;
   Real nNeu "num of neutron";
   units.Time LAMBDA "neutron generation time";
@@ -67,7 +67,7 @@ model KineticReactor_00
   discrete Real nC0[nPrecursor_par];
   discrete Real rho0 "initial reactivity";
   discrete Real NnukeFuel0 "num density of nuclear fuel";
-  discrete Real numNukeFuel0 "initial num of nuclei";
+  discrete Real nNukeFuel0 "initial num of nuclei";
   //---
   Real pwrRel0 "pwr/pwr0";
   Real denNeuRel0 "denNeu/denNneu0";
@@ -109,7 +109,7 @@ initial equation
   pwr0 = pwr;
   LAMBDA0 = LAMBDA;
   nNeu0 = denNneu0*Vol;
-  numNukeFuel0= NnukeFuel0*Vol;
+  nNukeFuel0= NnukeFuel0*Vol;
 //----
   denNneu0 = denNneu0_par;
   NnukeFuel0= denNnukeFuel_par;
@@ -150,7 +150,7 @@ equation
     nNeu0 = nNeu;
     rho0 = rho;
     NnukeFuel0= denNnukeFuel;
-    numNukeFuel0= numNukeFuel;
+    nNukeFuel0= nNukeFuel;
     for i in 1:nPrecursor_par loop
       C0[i]=C[i];
       nC0[i]=nC[i];
@@ -187,8 +187,8 @@ equation
   
   der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
 //-----
-  numNukeFuel= numNukeFuel0;
-  denNnukeFuel= numNukeFuel/Vol;
+  nNukeFuel= nNukeFuel0;
+  denNnukeFuel= nNukeFuel/Vol;
   nNeu = denNeu*Vol;
   
   PHI = denNeu*v;

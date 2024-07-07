@@ -32,5 +32,5 @@ equation
   connect(PtRctr.y_derNneuqNneu, inverseBlockConstraints.u2) annotation(
     Line(points = {{22, 20}, {32, 20}, {32, -32}, {-52, -32}, {-52, 8}}, color = {0, 0, 127}, pattern = LinePattern.Dash));
   annotation(
-    experiment(StartTime = 0, StopTime = 100, Tolerance = 1e-06, Interval = 0.001));
+    experiment(StartTime = 0, StopTime = 100, Tolerance = 1e-06, Interval = 0.01));
 end KineticReactor_00_ex03;
