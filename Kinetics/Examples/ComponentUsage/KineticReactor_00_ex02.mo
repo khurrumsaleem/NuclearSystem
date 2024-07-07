@@ -3,7 +3,7 @@ within NuclearSystem.Kinetics.Examples.ComponentUsage;
 model KineticReactor_00_ex02
   extends Modelica.Icons.Example;
   
-  Components.KineticReactor_00 PtRctr annotation(
+  Components.KineticReactor_00 PtRctr(use_HeatTransfer = false)  annotation(
     Placement(transformation(origin = {93, 16}, extent = {{-15, -15}, {15, 15}})));
   Modelica.Blocks.Sources.Ramp ramp_tgt_pwrRel0(height = 0, duration = 0.001, offset = 1, startTime = 10) annotation(
     Placement(transformation(origin = {-144, 16}, extent = {{-10, -10}, {10, 10}})));

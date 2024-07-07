@@ -14,7 +14,6 @@ model KineticReactor_00
   /*-----------------------------------
       parameters
       -----------------------------------*/
-  //parameter Real numNeu0_par= 1e12 "initial number of neutron";
   parameter Real denNneu0_par = 1e14 "initial neutron density";
   parameter units.Volume Vol_par = 1.0;
   parameter Real kFuelDens_par = 0.001 "";
@@ -27,7 +26,7 @@ model KineticReactor_00
   parameter Real beta_par[nPrecursor_par] = {0.000215, 0.001424, 0.001274, 0.002568, 0.000748, 0.000273};
   parameter units.DecayConstant lambda_par[nPrecursor_par] = {0.0126, 0.0337, 0.139, 0.325, 1.13, 3.5};
   //-------------------------
-  parameter Boolean use_HeatTransfer = false
+  parameter Boolean use_HeatTransfer = true
   "= true to use the HeatTransfer model"
       annotation (Dialog(tab="Assumptions", group="Heat transfer"));
   parameter Boolean use_u_Vol = false
@@ -91,7 +90,7 @@ model KineticReactor_00
     Placement(transformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealInput u_Vol if use_u_Vol "volume input" annotation(
     Placement(transformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}})));
-
+  //----------
   Modelica.Blocks.Interfaces.RealOutput y_pwr(unit = "W", displayUnit = "W") "" annotation(
     Placement(transformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, -40}, extent = {{-5, -5}, {5, 5}})));
   Modelica.Blocks.Interfaces.RealOutput y_pwrRel0 annotation(
@@ -100,11 +99,12 @@ model KineticReactor_00
     Placement(transformation(origin = {60, -100}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-80, -100}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort if use_HeatTransfer
     annotation (Placement(transformation(origin = {200, 0}, extent = {{-110, -10}, {-90, 10}}), iconTransformation(origin = {200, 0}, extent = {{-110, -10}, {-90, 10}})));
-  //**********************************************************************
   Modelica.Blocks.Interfaces.RealOutput y_der_nNeu annotation(
     Placement(transformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, 40}, extent = {{-5, -5}, {5, 5}})));
   Modelica.Blocks.Interfaces.RealOutput y_derNneuqNneu annotation(
     Placement(transformation(origin = {110, 60}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, 60}, extent = {{-5, -5}, {5, 5}})));
+
+  //**********************************************************************
 initial equation
   pwr0 = pwr;
   LAMBDA0 = LAMBDA;
