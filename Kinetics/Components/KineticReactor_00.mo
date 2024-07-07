@@ -66,7 +66,7 @@ model KineticReactor_00
   discrete Real C0[nPrecursor_par];
   discrete Real nC0[nPrecursor_par];
   discrete Real rho0 "initial reactivity";
-  discrete Real NnukeFuel0 "num density of nuclear fuel";
+  discrete Real denNnukeFuel0 "num density of nuclear fuel";
   discrete Real nNukeFuel0 "initial num of nuclei";
   //---
   Real pwrRel0 "pwr/pwr0";
@@ -109,10 +109,10 @@ initial equation
   pwr0 = pwr;
   LAMBDA0 = LAMBDA;
   nNeu0 = denNneu0*Vol;
-  nNukeFuel0= NnukeFuel0*Vol;
+  nNukeFuel0= denNnukeFuel0*Vol;
 //----
   denNneu0 = denNneu0_par;
-  NnukeFuel0= denNnukeFuel_par;
+  denNnukeFuel0= denNnukeFuel_par;
 //----
   denNneu = denNneu0;
   for i in 1:nPrecursor_par loop
@@ -149,7 +149,7 @@ equation
     LAMBDA0 = LAMBDA;
     nNeu0 = nNeu;
     rho0 = rho;
-    NnukeFuel0= denNnukeFuel;
+    denNnukeFuel0= denNnukeFuel;
     nNukeFuel0= nNukeFuel;
     for i in 1:nPrecursor_par loop
       C0[i]=C[i];

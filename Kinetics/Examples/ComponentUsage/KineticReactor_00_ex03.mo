@@ -3,7 +3,7 @@ within NuclearSystem.Kinetics.Examples.ComponentUsage;
 model KineticReactor_00_ex03
   extends Modelica.Icons.Example;
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 288.15) annotation(
-    Placement(transformation(origin = {88, 8}, extent = {{10, -10}, {-10, 10}})));
+    Placement(transformation(origin = {78, 8}, extent = {{10, -10}, {-10, 10}})));
   Modelica.Blocks.Sources.Ramp ramp_Vol(height = 0.5, duration = 5, offset = 1, startTime = 20)  annotation(
     Placement(transformation(origin = {-52, 46}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Ramp ramp_der_nNeu(duration = 5, height = 0, offset = 0, startTime = 20) annotation(
@@ -20,7 +20,7 @@ equation
   connect(ramp_der_nNeu.y, inverseBlockConstraints.u1) annotation(
     Line(points = {{-67, 8}, {-55, 8}}, color = {0, 0, 127}, pattern = LinePattern.Dash));
   connect(heatFlowSensor.port_b, fixedTemperature.port) annotation(
-    Line(points = {{56, 8}, {78, 8}}, color = {191, 0, 0}));
+    Line(points = {{56, 8}, {68, 8}}, color = {191, 0, 0}));
   connect(heatFlowSensor.Q_flow, realValue.numberPort) annotation(
     Line(points = {{49, 0}, {49, -13}, {53, -13}}, color = {0, 0, 127}));
   connect(inverseBlockConstraints.y1, PtRctr.u_rho) annotation(
