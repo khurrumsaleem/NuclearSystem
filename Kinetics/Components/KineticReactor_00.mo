@@ -41,7 +41,7 @@ model KineticReactor_00
   NuclearSystem.Constants.Common CmnConsts;
   Real denNnukeFuel "num density of nuclear fuel";
   Real nNukeFuel "num of nuclei";
-  units.NeutronNumberDensity denNeu;
+  units.NeutronNumberDensity denNneu;
   Real nNeu "num of neutron";
   units.Time LAMBDA "neutron generation time";
   Real nu "average number of neutrons produced per fission";
@@ -70,7 +70,7 @@ model KineticReactor_00
   discrete Real nNukeFuel0 "initial num of nuclei";
   //---
   Real pwrRel0 "pwr/pwr0";
-  Real denNeuRel0 "denNeu/denNneu0";
+  Real denNneuRel0 "denNneu/denNneu0";
   Real Crel0[nPrecursor_par] "C/C0";
   Real derNneuqNneu "der(nNeu)/nNeu";
   //---
@@ -114,13 +114,13 @@ initial equation
   denNneu0 = denNneu0_par;
   NnukeFuel0= denNnukeFuel_par;
 //----
-  denNeu = denNneu0;
+  denNneu = denNneu0;
   for i in 1:nPrecursor_par loop
     C[i] = C0[i];
     der(C[i])=0.0;
   end for;
   
-  der(denNeu)=0.0;
+  der(denNneu)=0.0;
 //**********************************************************************
 algorithm
 //**********************************************************************
@@ -143,7 +143,7 @@ equation
   
 //----------
   when (time == 0) then
-    denNneu0 = denNeu;
+    denNneu0 = denNneu;
 //-----
     pwr0 = pwr;
     LAMBDA0 = LAMBDA;
@@ -189,9 +189,9 @@ equation
 //-----
   nNukeFuel= nNukeFuel0;
   denNnukeFuel= nNukeFuel/Vol;
-  nNeu = denNeu*Vol;
+  nNeu = denNneu*Vol;
   
-  PHI = denNeu*v;
+  PHI = denNneu*v;
   pwr = Efiss_par*SIGMAf*PHI*Vol;
   pwr = der(engy);
 //-----
@@ -203,7 +203,7 @@ equation
   end if;
 //-----
   derNneuqNneu= der(nNeu)/nNeu;
-  denNeuRel0 = denNeu/denNneu0;
+  denNneuRel0 = denNneu/denNneu0;
   pwrRel0 = pwr/pwr0;
   rho_dollar= rho/betaTotal;
   rho_cent= rho_dollar*100.0;
