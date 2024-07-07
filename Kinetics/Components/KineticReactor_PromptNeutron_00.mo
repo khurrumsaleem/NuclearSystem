@@ -23,9 +23,6 @@ model KineticReactor_PromptNeutron_00
   parameter units.Area sigmaF_par = 1.199*10^(-28) "microscopic fission cross section";
   parameter units.Velocity v_par = CmnConsts.vNeuFree_Fission_1MeV "neutron velocity";
   
-  //parameter Integer nPrecursor_par = 6 "";
-  //parameter Real beta_par[nPrecursor_par] = {0.000215, 0.001424, 0.001274, 0.002568, 0.000748, 0.000273};
-  //parameter units.DecayConstant lambda_par[nPrecursor_par] = {0.0126, 0.0337, 0.139, 0.325, 1.13, 3.5};
   
   //-------------------------
   parameter Boolean use_HeatTransfer = true
@@ -57,33 +54,18 @@ model KineticReactor_PromptNeutron_00
   units.Energy engy "";
   Real engy_TNTeq;
   units.Time T "characteristic time(or time constant in linear system)";
-  //Real rho_dollar "rho/betaTotal";
-  //Real rho_cent "rho/betaTotal*100";
   //---
   discrete units.Power pwr0 "pwr at t=0";
   discrete units.Time LAMBDA0 "neutron generation time, at time=0";
   discrete units.NeutronNumberDensity denNneu0;
   discrete Real nNeu0 "initial num of neutron";
-  //discrete Real C0[nPrecursor_par];
-  //discrete Real nC0[nPrecursor_par];
   discrete Real rho0 "initial reactivity";
   discrete Real denNnukeFuel0 "num density of nuclear fuel";
   discrete Real nNukeFuel0 "initial num of nuclei";
   //---
   Real pwrRel0 "pwr/pwr0";
   Real denNneuRel0 "denNneu/denNneu0";
-  //Real Crel0[nPrecursor_par] "C/C0";
   Real derNneuqNneu "der(nNeu)/nNeu";
-  //---
-  //Real beta[nPrecursor_par];
-  //Real betaTotal;
-  //Real C[nPrecursor_par] "precursor density";
-  //Real nC[nPrecursor_par] "number of precursor";
-  //units.DecayConstant lambda[nPrecursor_par];
-  //units.NeutronNumberDensity lambdaC[nPrecursor_par];
-  //Real lambdaNC[nPrecursor_par];
-  //units.NeutronNumberDensity SIGMA_lambdaC;
-  //Real SIGMA_lambdaNC;
   //---
   /*-----------------------------------
       interfaces
@@ -117,20 +99,12 @@ initial equation
   denNnukeFuel0= denNnukeFuel_par;
 //----
   denNneu = denNneu0;
-  //for i in 1:nPrecursor_par loop
-  //  C[i] = C0[i];
-  //  der(C[i])=0.0;
-  //end for;
   
   der(denNneu)=0.0;
 //**********************************************************************
 algorithm
 //**********************************************************************
 equation
-  //for i in 1:nPrecursor_par loop
-  //  beta[i] = beta_par[i];
-  //  lambda[i] = lambda_par[i];
-  //end for;
   
   nu = nu_par;
   v = v_par;
@@ -153,10 +127,6 @@ equation
     rho0 = rho;
     denNnukeFuel0= denNnukeFuel;
     nNukeFuel0= nNukeFuel;
-    //for i in 1:nPrecursor_par loop
-    //  C0[i]=C[i];
-    //  nC0[i]=nC[i];
-    //end for;
   end when;
 //----------
   rho = u_rho;
@@ -173,21 +143,6 @@ equation
   rho = (kEff - 1)/kEff;
   LAMBDA = 1/(nu*SIGMAf*v);
 //-----
-//-
-  //for i in 1:nPrecursor_par loop
-  //  der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i];
-  //  lambdaNC[i] = lambda[i]*nC[i];
-  //  lambdaC[i] = lambda[i]*C[i];
-//-----
-  //  Crel0[i] = C[i]/C0[i];
-  //  nC[i]= C[i]*Vol;
-  //end for;
-//-
-  //betaTotal = sum(beta);
-  //SIGMA_lambdaC = sum(lambdaC);
-  //SIGMA_lambdaNC = sum(lambdaNC);
-  
-  //der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
   der(nNeu) = (rho /LAMBDA)*nNeu;
 //-----
   nNukeFuel= nNukeFuel0;
@@ -206,18 +161,11 @@ equation
     T= 0.0;
   end if;
   
-  //T = LAMBDA/rho;
-  //if (0.0 < abs(rho-betaTotal)) then
-  //  T = LAMBDA/(rho-betaTotal);
-  //else
-  //  T = 0.0;
-  //end if;
 //-----
   derNneuqNneu= der(nNeu)/nNeu;
   denNneuRel0 = denNneu/denNneu0;
   pwrRel0 = pwr/pwr0;
-  //rho_dollar= rho/betaTotal;
-  //rho_cent= rho_dollar*100.0;
+  
 //----------
 
 annotation(
