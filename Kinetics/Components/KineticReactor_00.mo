@@ -15,7 +15,7 @@ model KineticReactor_00
       parameters
       -----------------------------------*/
   //parameter Real numNeu0_par= 1e12 "initial number of neutron";
-  parameter Real denNeu0_par = 1e14 "initial neutron density";
+  parameter Real denNneu0_par = 1e14 "initial neutron density";
   parameter units.Volume Vol_par = 1.0;
   parameter Real kFuelDens_par = 0.001 "";
   parameter Real denNnukeFuel_par = 0.05*(19*10^6/238)*conv.factor_mole2num() "nuclear number density, [num/m3]";
@@ -61,7 +61,7 @@ model KineticReactor_00
   //---
   discrete units.Power pwr0 "pwr at t=0";
   discrete units.Time LAMBDA0 "neutron generation time, at time=0";
-  discrete units.NeutronNumberDensity denNeu0;
+  discrete units.NeutronNumberDensity denNneu0;
   discrete Real nNeu0 "initial num of neutron";
   discrete Real C0[nPrecursor_par];
   discrete Real nC0[nPrecursor_par];
@@ -70,7 +70,7 @@ model KineticReactor_00
   discrete Real numNukeFuel0 "initial num of nuclei";
   //---
   Real pwrRel0 "pwr/pwr0";
-  Real denNeuRel0 "denNeu/denNeu0";
+  Real denNeuRel0 "denNeu/denNneu0";
   Real Crel0[nPrecursor_par] "C/C0";
   Real derNneuqNneu "der(nNeu)/nNeu";
   //---
@@ -108,13 +108,13 @@ model KineticReactor_00
 initial equation
   pwr0 = pwr;
   LAMBDA0 = LAMBDA;
-  nNeu0 = denNeu0*Vol;
+  nNeu0 = denNneu0*Vol;
   numNukeFuel0= NnukeFuel0*Vol;
 //----
-  denNeu0 = denNeu0_par;
+  denNneu0 = denNneu0_par;
   NnukeFuel0= denNnukeFuel_par;
 //----
-  denNeu = denNeu0;
+  denNeu = denNneu0;
   for i in 1:nPrecursor_par loop
     C[i] = C0[i];
     der(C[i])=0.0;
@@ -143,7 +143,7 @@ equation
   
 //----------
   when (time == 0) then
-    denNeu0 = denNeu;
+    denNneu0 = denNeu;
 //-----
     pwr0 = pwr;
     LAMBDA0 = LAMBDA;
@@ -203,7 +203,7 @@ equation
   end if;
 //-----
   derNneuqNneu= der(nNeu)/nNeu;
-  denNeuRel0 = denNeu/denNeu0;
+  denNeuRel0 = denNeu/denNneu0;
   pwrRel0 = pwr/pwr0;
   rho_dollar= rho/betaTotal;
   rho_cent= rho_dollar*100.0;
