@@ -2,13 +2,13 @@ within NuclearSystem.Kinetics.Examples.Temp;
 
 model Expl_KineticReactorPromptNeutron_v01
   extends Modelica.Icons.Example;
-  Components.KineticReactor_PromptNeutron_00 PtRctr(use_HeatTransfer = true, switchInit_derDenNneu = NuclearSystem.Types.Switches.switch_initialization.Free) annotation(
+  Components.KineticReactor_PromptNeutron_00 PtRctr(use_HeatTransfer = true, switchInit_derDenNneu = NuclearSystem.Types.Switches.switch_initialization.Free, denNneu0_par = 2600, kFuelDens_par = 1, Vol_par = 0.00038, denNnukeFuel_par = 4.640024916346489e29) annotation(
     Placement(transformation(origin = {0, 18}, extent = {{-20, -20}, {20, 20}})));
   Modelica.Blocks.Interaction.Show.RealValue realValue_pwr(significantDigits = 4) annotation(
     Placement(transformation(origin = {55, -30}, extent = {{-17, -9}, {17, 9}})));
   Modelica.Blocks.Interaction.Show.RealValue realValue_pwr1(significantDigits = 4) annotation(
     Placement(transformation(origin = {55, -19}, extent = {{-17, -9}, {17, 9}})));
-  Modelica.Blocks.Sources.Step step_rho(height = 0, offset = 1.2, startTime = 0) annotation(
+  Modelica.Blocks.Sources.Step step_rho(height = 0, offset = 0.9, startTime = 0) annotation(
     Placement(transformation(origin = {-62, 18}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 288.15) annotation(
     Placement(transformation(origin = {78, 18}, extent = {{10, -10}, {-10, 10}})));
@@ -30,5 +30,5 @@ equation
   connect(step_rho.y, PtRctr.u_rho) annotation(
     Line(points = {{-50, 18}, {-22, 18}}, color = {0, 0, 127}));
   annotation(
-    experiment(StartTime = 0, StopTime = 1e-03, Tolerance = 1e-06, Interval = 1e-07));
+    experiment(StartTime = 0, StopTime = 1e-07, Tolerance = 1e-06, Interval = 1e-10));
 end Expl_KineticReactorPromptNeutron_v01;

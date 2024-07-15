@@ -16,7 +16,7 @@ model KineticReactor_00
       -----------------------------------*/
   parameter Real denNneu0_par = 1e14 "initial neutron density";
   parameter units.Volume Vol_par = 1.0;
-  parameter Real kFuelDens_par = 0.001 "";
+  parameter Real kFuelDens_par = 0.001 "corelation coefficient to manipulate design point power";
   parameter Real denNnukeFuel_par = 0.05*(19*10^6/238)*conv.factor_mole2num() "nuclear number density, [num/m3]";
   parameter units.Energy Efiss_par = 200*10^6*conv.factor_eV2J();
   parameter Real nu_par = 2.43 "average number of neutrons produced per fission";
