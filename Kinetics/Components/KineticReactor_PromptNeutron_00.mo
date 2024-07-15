@@ -14,6 +14,7 @@ model KineticReactor_PromptNeutron_00
   /*-----------------------------------
       parameters
       -----------------------------------*/
+  
   parameter Real denNneu0_par = 1e14 "initial neutron density";
   parameter units.Volume Vol_par = 1.0;
   parameter Real kFuelDens_par = 0.001 "";
@@ -23,7 +24,6 @@ model KineticReactor_PromptNeutron_00
   parameter units.Area sigmaF_par = 1.199*10^(-28) "microscopic fission cross section";
   parameter units.Velocity v_par = CmnConsts.vNeuFree_Fission_1MeV "neutron velocity";
   
-  
   //-------------------------
   parameter Boolean use_HeatTransfer = true
   "= true to use the HeatTransfer model"
@@ -31,6 +31,11 @@ model KineticReactor_PromptNeutron_00
   parameter Boolean use_u_Vol = false
   "= true to use Vol input signal"
       annotation (Dialog(tab="General", group="Switches"));
+  
+  //-------------------------
+  parameter NuclearSystem.Types.Switches.switch_initialization switchInitNeutron= NuclearSystem.Types.Switches.switch_initialization.FixedDerInitial annotation (Dialog(tab="Initialization", group="Switches"));
+  
+  parameter Real der_denNneu0_par = 0.0 if switchInitNeutron==NuclearSystem.Types.Switches.switch_initialization.FixedDerInitial "initial der(neutron density)" annotation (Dialog(tab="Initialization", group="Initial"));
   
   
   /*-----------------------------------
@@ -100,7 +105,11 @@ initial equation
 //----
   denNneu = denNneu0;
   
-  der(denNneu)=0.0;
+  if(switchInitNeutron==NuclearSystem.Types.Switches.switch_initialization.FixedDerInitial)then
+    der(denNneu)=der_denNneu0_par;  
+  end if;
+  
+  
 //**********************************************************************
 algorithm
 //**********************************************************************
