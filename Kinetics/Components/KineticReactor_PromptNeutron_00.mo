@@ -33,9 +33,9 @@ model KineticReactor_PromptNeutron_00
       annotation (Dialog(tab="General", group="Switches"));
   
   //-------------------------
-  parameter NuclearSystem.Types.Switches.switch_initialization switchInitNeutron= NuclearSystem.Types.Switches.switch_initialization.FixedDerInitial annotation (Dialog(tab="Initialization", group="Switches"));
+  parameter NuclearSystem.Types.Switches.switch_initialization switchInit_derDenNneu= NuclearSystem.Types.Switches.switch_initialization.FixedInitial annotation (Dialog(tab="Initialization", group="Switches"));
   
-  parameter Real der_denNneu0_par = 0.0 if switchInitNeutron==NuclearSystem.Types.Switches.switch_initialization.FixedDerInitial "initial der(neutron density)" annotation (Dialog(tab="Initialization", group="Initial"));
+  parameter Real der_denNneu0_par = 0.0 if switchInit_derDenNneu==NuclearSystem.Types.Switches.switch_initialization.FixedInitial "initial der(neutron density)" annotation (Dialog(tab="Initialization", group="Initial"));
   
   
   /*-----------------------------------
@@ -105,7 +105,7 @@ initial equation
 //----
   denNneu = denNneu0;
   
-  if(switchInitNeutron==NuclearSystem.Types.Switches.switch_initialization.FixedDerInitial)then
+  if(switchInit_derDenNneu==NuclearSystem.Types.Switches.switch_initialization.FixedInitial)then
     der(denNneu)=der_denNneu0_par;  
   end if;
   

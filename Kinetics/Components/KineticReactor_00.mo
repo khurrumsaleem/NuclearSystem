@@ -33,6 +33,12 @@ model KineticReactor_00
   "= true to use Vol input signal"
       annotation (Dialog(tab="General", group="Switches"));
   
+  //-------------------------
+  parameter NuclearSystem.Types.Switches.switch_initialization switchInit_derDenNneu= NuclearSystem.Types.Switches.switch_initialization.FixedInitial annotation (Dialog(tab="Initialization", group="Switches"));
+  
+  parameter Real der_denNneu0_par = 0.0 if switchInit_derDenNneu==NuclearSystem.Types.Switches.switch_initialization.FixedInitial "initial der(neutron density)" annotation (Dialog(tab="Initialization", group="Initial"));
+  
+  
   
   /*-----------------------------------
       internal objects
@@ -120,7 +126,10 @@ initial equation
     der(C[i])=0.0;
   end for;
   
-  der(denNneu)=0.0;
+  if(switchInit_derDenNneu==NuclearSystem.Types.Switches.switch_initialization.FixedInitial)then
+    der(denNneu)=0.0;
+  end if;
+  
 //**********************************************************************
 algorithm
 //**********************************************************************
