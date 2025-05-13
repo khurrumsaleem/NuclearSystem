@@ -1,0 +1,10 @@
+within NuclearSystem.Kinetics.Components;
+
+model CritCndi_Bare_ExtrFastFission "Criticality Condition, bare core, extreme fast fissoin"
+  Modelica.Blocks.Interfaces.RealInput u_Rc annotation(
+    Placement(transformation(origin = {-120, 60}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-108, 62}, extent = {{-20, -20}, {20, 20}})));
+equation
+
+annotation(
+    Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}})}));
+end CritCndi_Bare_ExtrFastFission;

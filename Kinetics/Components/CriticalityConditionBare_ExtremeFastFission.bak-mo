@@ -1,0 +1,8 @@
+within NuclearSystem.Kinetics.Components;
+
+model CriticalityConditionBare_ExtremeFastFission
+equation
+
+annotation(
+    Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}})}));
+end CriticalityConditionBare_ExtremeFastFission;

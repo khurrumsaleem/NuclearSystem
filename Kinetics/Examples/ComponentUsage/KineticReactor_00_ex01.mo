@@ -21,15 +21,13 @@ model KineticReactor_00_ex01
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor annotation(
     Placement(transformation(origin = {-15, 6}, extent = {{-5, -5}, {5, 5}})));
   HeatTransferComponents.Common.HeatCapacitorColorT HeatCapacitor(C = (0.444*1000)*1000, T(start = 288.15, fixed = true), switchUnitT = HeatTransferComponents.Types.SwitchUnitVisTemperature.degC, valMin = TcontourMin, valMax = TcontourMax) annotation(
-    Placement(transformation(origin = {7, 18}, extent = {{-13, -12}, {13, 12}})));
-  Modelica.Thermal.HeatTransfer.Components.Convection convection annotation(
-    Placement(transformation(origin = {41, 6}, extent = {{-7, -7}, {7, 7}})));
+    Placement(transformation(origin = {10, 16}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor1 annotation(
     Placement(transformation(origin = {60, 6}, extent = {{-5, -5}, {5, 5}})));
   Modelica.Blocks.Interaction.Show.RealValue realValue1(significantDigits = 4) annotation(
     Placement(transformation(origin = {74, -20}, extent = {{-9, -6}, {9, 6}})));
   Modelica.Blocks.Sources.Constant const_Gc(k = 100) annotation(
-    Placement(transformation(origin = {41, 36}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+    Placement(transformation(origin = {36, 36}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
   HeatTransferComponents.Sensors.Temperature_degC_DispColor00 TemperatureDegC(valMin = TcontourMin, valMax = TcontourMax) annotation(
     Placement(transformation(origin = {88, 14}, extent = {{-12, -3}, {12, 3}})));
   Modelica.Blocks.Math.Gain gain(k = 1e-6) annotation(
@@ -38,21 +36,22 @@ model KineticReactor_00_ex01
     Placement(transformation(origin = {60, -10}, extent = {{-4, -4}, {4, 4}}, rotation = -90)));
   Modelica.Blocks.Interaction.Show.RealValue realValue_pwr(significantDigits = 4) annotation(
     Placement(transformation(origin = {3, -64}, extent = {{-17, -9}, {17, 9}})));
+  HeatTransferComponents.Common.ConvectionArrowQflow convection annotation(
+    Placement(transformation(origin = {36, 6}, extent = {{-10, -10}, {10, 10}})));
+
+initial equation
+  PtRctr.Vol_par=2;
+  
+  
 equation
   connect(step_rho.y, PtRctr.u_rho) annotation(
     Line(points = {{-79, 6}, {-70, 6}}, color = {0, 0, 127}));
   connect(PtRctr.heatPort, heatFlowSensor.port_a) annotation(
-    Line(points = {{-34, 6}, {-20, 6}}, color = {191, 0, 0}));
+    Line(points = {{-34, 6}, {-20, 6}}, color = {191, 0, 0}, thickness = 1.5));
   connect(heatFlowSensor.port_b, HeatCapacitor.port) annotation(
-    Line(points = {{-10, 6}, {7, 6}}, color = {191, 0, 0}));
-  connect(convection.solid, HeatCapacitor.port) annotation(
-    Line(points = {{34, 6}, {7, 6}}, color = {191, 0, 0}));
-  connect(convection.fluid, heatFlowSensor1.port_a) annotation(
-    Line(points = {{48, 6}, {55, 6}}, color = {191, 0, 0}));
+    Line(points = {{-10, 6}, {10, 6}}, color = {191, 0, 0}, thickness = 1.5));
   connect(fixedTemperature.port, heatFlowSensor1.port_b) annotation(
-    Line(points = {{80, 6}, {65, 6}}, color = {191, 0, 0}));
-  connect(const_Gc.y, convection.Gc) annotation(
-    Line(points = {{41, 29.4}, {41, 13.4}}, color = {0, 0, 127}));
+    Line(points = {{80, 6}, {65, 6}}, color = {191, 0, 0}, thickness = 1.5));
   connect(fixedTemperature.port, TemperatureDegC.heatPort) annotation(
     Line(points = {{80, 6}, {76, 6}, {76, 14}}, color = {191, 0, 0}));
   connect(heatFlowSensor.Q_flow, gain.u) annotation(
@@ -65,6 +64,12 @@ equation
     Line(points = {{63.65, -20}, {59.65, -20}, {59.65, -14}}, color = {0, 0, 127}));
   connect(PtRctr.y_pwrRel0, realValue_pwr.numberPort) annotation(
     Line(points = {{-33, -4}, {-28, -4}, {-28, -64}, {-16, -64}}, color = {0, 0, 127}));
+  connect(const_Gc.y, convection.Gc) annotation(
+    Line(points = {{36, 29.4}, {36, 16.4}}, color = {0, 0, 127}));
+  connect(HeatCapacitor.port, convection.solid) annotation(
+    Line(points = {{10, 6}, {26, 6}}, color = {191, 0, 0}, thickness = 1.5));
+  connect(convection.fluid, heatFlowSensor1.port_a) annotation(
+    Line(points = {{46, 6}, {56, 6}}, color = {191, 0, 0}, thickness = 1.5));
   annotation(
     experiment(StartTime = 0, StopTime = 30, Tolerance = 1e-06, Interval = 0.002),
     Diagram(graphics = {Text(origin = {2, 39}, extent = {{-24, 7}, {24, -7}}, textString = "heat capacity of 
