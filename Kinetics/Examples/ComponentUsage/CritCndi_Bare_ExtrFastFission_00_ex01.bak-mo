@@ -7,7 +7,7 @@ model CritCndi_Bare_ExtrFastFission_00_ex01
     Placement(transformation(origin = {-10, 16}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant const_Rcore(k = 0.084)  annotation(
     Placement(transformation(origin = {-52, 20}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Sources.Constant const_n(k = 0.1811*10^6*NukeSys_Factors.mole2num/0.23504393) annotation(
+  Modelica.Blocks.Sources.Constant const_n(k = 4.794*10^22*10^6) annotation(
     Placement(transformation(origin = {-52, -16}, extent = {{-10, -10}, {10, 10}})));
   NuclearSystem.Constants.Factor NukeSys_Factors annotation(
     Placement(transformation(origin = {-58, 64}, extent = {{-10, -10}, {10, 10}})));

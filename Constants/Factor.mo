@@ -3,8 +3,10 @@ within NuclearSystem.Constants;
 model Factor
   import units= Modelica.Units.SI;
   
-  constant Real mole2num= 6.02214076*10^23 "";
-    //source:
+  constant Real mole_to_num= 6.02214076*10^23 "";
+  constant Real cm3_to_m3= 1e-6 "";
+  constant Real barn_to_m2=10^(-28);
+  
 equation
 
 annotation(
