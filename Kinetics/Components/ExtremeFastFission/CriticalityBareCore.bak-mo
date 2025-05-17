@@ -1,0 +1,45 @@
+within NuclearSystem.Kinetics.Components.ExtremeFastFission;
+
+model CriticalityBareCore "Criticality Condition, bare core, extreme fast fissoin"
+  import units = Modelica.Units.SI;
+  /******************************
+    parameter
+    ******************************/
+  /******************************
+    variable
+    ******************************/
+  Real nNuke;
+  Real lambdaCoreTrans;
+  units.Length dCore;
+  units.Length RCore;
+  /******************************
+    Internal objects
+    ******************************/
+  Constants.Factor NukeSys_Factors annotation(
+    Placement(transformation(origin = {-12, 60}, extent = {{-10, -10}, {10, 10}})));
+  /******************************
+    interfaces
+    ******************************/
+  Modelica.Blocks.Interfaces.RealInput u_dCore annotation(
+    Placement(transformation(origin = {-120, 0}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-110, 0}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Interfaces.RealInput u_nNuke "nuclear number density, [num/m3]" annotation(
+    Placement(transformation(origin = {-120, -40}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-110, -60}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Interfaces.RealOutput y_RCore annotation(
+    Placement(transformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 0}, extent = {{-10, -10}, {10, 10}})));
+  //**************************************************
+  Modelica.Blocks.Interfaces.RealInput u_lambdaCoreTrans annotation(
+    Placement(transformation(origin = {-120, 40}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-110, 60}, extent = {{-10, -10}, {10, 10}})));
+equation
+//-----
+  dCore = u_dCore;
+  nNuke = u_nNuke;
+  lambdaCoreTrans = u_lambdaCoreTrans;
+//-----
+  y_RCore = RCore;
+//-----
+  (dCore/RCore)*1.0/tan(dCore/RCore) + (3*RCore/(2*lambdaCoreTrans))*(dCore/RCore) - 1 = 0;
+  annotation(
+    defaultComponentName = "f_RCore",
+    Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -112}, extent = {{-120, 8}, {120, -8}}, textString = "%name"), Text(origin = {0, -1}, extent = {{-100, 39}, {100, -39}}, textString = "Criticality
+Condition")}));
+end CriticalityBareCore;

@@ -1,0 +1,44 @@
+within NuclearSystem.Kinetics.Components.ExtremeFastFission;
+
+model dCoreRelation
+  import units=Modelica.Units.SI;
+  
+  
+  /******************************
+  parameter
+  ******************************/
+  parameter units.Area sigmaF_par = 1.235*NukeSys_Factors.barn_to_m2 "";
+  parameter units.Area sigmaEl_par = 4.566*NukeSys_Factors.barn_to_m2 "";
+  parameter Real nuNeu_par= 2.637;
+  
+  
+  /******************************
+  Internal objects
+  ******************************/
+  Constants.Factor NukeSys_Factors annotation(
+    Placement(transformation(origin = {-12, 60}, extent = {{-10, -10}, {10, 10}})));
+  
+  
+  Interface.SinglePortReal port_alpha annotation(
+    Placement(transformation(origin = {-110, 38}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-100, 40}, extent = {{-5, -5}, {5, 5}})));
+  NuclearSystem.Interface.SinglePortReal port_nNuke annotation(
+    Placement(transformation(origin = {-100, 48}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-100, -39}, extent = {{-5, -5}, {5, 5}})));
+equation
+  
+  sigmaF= sigmaF_par;
+  sigmaEl= sigmaEl_par;
+  nuNeu= nuNeu_par;
+  //-----
+  alpha= port_alpha;
+  nNuke= port_nNuke;
+  //-----
+  //y_dCore= dCore;
+  //y_lambdaCoreTrans= lambdaCoreTrans;
+  //-----
+  
+  
+annotation(
+    Diagram(graphics),
+    Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -1}, extent = {{-100, 39}, {100, -39}}, textString = "Diffusion
+Relation")}));
+end dCoreRelation;

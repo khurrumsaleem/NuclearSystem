@@ -6,23 +6,25 @@ model CritCndi_Bare_ExtrFastFission_ex01
     Placement(transformation(origin = {-58, 64}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant const_alpha(k = 0.6) annotation(
     Placement(transformation(origin = {-58, 24}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Sources.Constant const_n(k = 4.794*10^22*10^6) annotation(
+  Modelica.Blocks.Sources.Constant const_denNuke(k = 4.794*10^22*10^6) annotation(
     Placement(transformation(origin = {-58, -12}, extent = {{-10, -10}, {10, 10}})));
-  NuclearSystem.Kinetics.Components.dCoreByDifu_00 f_dCore annotation(
+  Components.ExtremeFastFission.dCoreDiffusionRelation_00 dCoreDiffu annotation(
     Placement(transformation(origin = {-24, 20}, extent = {{-10, -10}, {10, 10}})));
-  Components.RCoreByCrit_Bare_00 f_RCore annotation(
-    Placement(transformation(origin = {22, 18}, extent = {{-10, -10}, {10, 10}})));
+  Components.ExtremeFastFission.CriticalityBareCore_00 Criticality annotation(
+    Placement(transformation(origin = {12, 20}, extent = {{-10, -10}, {10, 10}})));
 equation
-  connect(const_alpha.y, f_dCore.u_alpha) annotation(
-    Line(points = {{-47, 24}, {-35, 24}}, color = {0, 0, 127}));
-  connect(const_n.y, f_dCore.u_nNuke) annotation(
-    Line(points = {{-47, -12}, {-43, -12}, {-43, 16}, {-35, 16}}, color = {0, 0, 127}));
-  connect(f_dCore.y_lambdaCoreTrans, f_RCore.u_lambdaCoreTrans) annotation(
-    Line(points = {{-12, 24}, {11, 24}}, color = {0, 0, 127}));
-  connect(f_dCore.y_dCore, f_RCore.u_dCore) annotation(
-    Line(points = {{-12, 16}, {-8, 16}, {-8, 18}, {11, 18}}, color = {0, 0, 127}));
-  connect(const_n.y, f_RCore.u_nNuke) annotation(
-    Line(points = {{-46, -12}, {-8, -12}, {-8, 12}, {11, 12}}, color = {0, 0, 127}));
+  connect(dCoreDiffu.port_lambdaCoreTrans, Criticality.port_lambdaCoreTrans) annotation(
+    Line(points = {{-16, 24}, {0, 24}}));
+  connect(dCoreDiffu.port_dCore, Criticality.port_dCore) annotation(
+    Line(points = {{-16, 16}, {-10, 16}, {-10, 18}, {0, 18}}));
+  connect(const_alpha.y, dCoreDiffu.port_alpha) annotation(
+    Line(points = {{-46, 24}, {-34, 24}}, color = {0, 0, 127}));
+  connect(const_denNuke.y, dCoreDiffu.port_denNuke) annotation(
+    Line(points = {{-46, -12}, {-40, -12}, {-40, 16}, {-34, 16}}, color = {0, 0, 127}));
+  connect(dCoreDiffu.port_lambdaCoreTrans, Criticality.port_lambdaCoreTrans) annotation(
+    Line(points = {{-14, 24}, {2, 24}}));
+  connect(dCoreDiffu.port_dCore, Criticality.port_dCore) annotation(
+    Line(points = {{-14, 16}, {2, 16}}));
   annotation(
     experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.01));
 end CritCndi_Bare_ExtrFastFission_ex01;
