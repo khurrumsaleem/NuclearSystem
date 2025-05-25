@@ -1,0 +1,6 @@
+within NuclearSystem.Kinetics.Components.ExtremeFastFission.BaseClasses;
+
+model MassNumberDensityRelation_00
+equation
+
+end MassNumberDensityRelation_00;

@@ -21,29 +21,26 @@ model dCoreDiffusionRelation_00
     Placement(transformation(origin = {-12, 60}, extent = {{-10, -10}, {10, 10}})));
   Interface.SinglePortReal port_alpha annotation(
     Placement(transformation(origin = {-118, 6}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-100, 40}, extent = {{-8, -8}, {8, 8}})));
-  Interface.SinglePortReal port_denNuke annotation(
+  Interface.SinglePortReal port_denNNuke annotation(
     Placement(transformation(origin = {-128, -64}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-100, -40}, extent = {{-8, -8}, {8, 8}})));
   Interface.SinglePortReal port_lambdaCoreTrans annotation(
     Placement(transformation(origin = {128, 8}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {100, 40}, extent = {{-8, -8}, {8, 8}})));
   Interface.SinglePortReal port_dCore annotation(
     Placement(transformation(origin = {106, -32}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {100, -40}, extent = {{-8, -8}, {8, 8}})));
-  
-  
   //**************************************************
 equation
   
   sigmaF= sigmaF_par;
   sigmaEl= sigmaEl_par;
   nuNeu= nuNeu_par;
-  //-----
+//-----
   alpha= port_alpha;
-  denNuke= port_denNuke;
-  //-----
+  denNNuke= port_denNNuke;
+//-----
   port_dCore= dCore;
   port_lambdaCoreTrans= lambdaCoreTrans;
-  //-----
-  
-  
+//-----
+
 annotation(
     defaultComponentName = "dCoreDiffu",
     Diagram(graphics),

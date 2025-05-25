@@ -1,6 +1,6 @@
 within NuclearSystem.Kinetics.Components.ExtremeFastFission.BaseClasses;
 
-model dCoreDiffusionRelation_Base
+model DiffusionAndCriticality_Bare_Base
   import units=Modelica.Units.SI;
   
   /******************************
@@ -17,16 +17,25 @@ model dCoreDiffusionRelation_Base
   Real lambdaCoreTrans "transport mean free path for neutrons";
   units.Area sigmaT "transport cross-section";
   
-  Real dCore;
   
+  units.Length dCore;
+  units.Length RCore;
   
+  units.Volume VCore;
+  Real Nnuke;
   
 equation
-
+  
   sigmaT= sigmaF + sigmaEl;
   lambdaCoreFiss= 1/(sigmaF*denNNuke);
   lambdaCoreTrans= 1/(sigmaT*denNNuke);
   dCore= sqrt((lambdaCoreFiss*lambdaCoreTrans)/(3*(-alpha+nuNeu-1)));
   
-
-end dCoreDiffusionRelation_Base;
+  (dCore/RCore)*1.0/tan(dCore/RCore) + (3*RCore/(2*lambdaCoreTrans))*(dCore/RCore) - 1 = 0;
+  
+  //-----
+  VCore= 4/3*Modelica.Constants.pi*RCore^3;
+  Nnuke= denNNuke*VCore;
+  
+  
+end DiffusionAndCriticality_Bare_Base;

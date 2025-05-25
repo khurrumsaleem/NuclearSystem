@@ -1,0 +1,15 @@
+within NuclearSystem.Kinetics.Components.ExtremeFastFission.BaseClasses;
+
+model NumberDensityRelation_Base
+  import unit=Modelica.Units.SI;
+  import const= Modelica.Constants;
+  
+  unit.NeutronNumberDensity denN "1/m3";
+  unit.Density denM "kg/m3";
+  unit.AtomicMassConstant AM "kg/mole";
+  
+equation
+  
+  denN= denM*const.N_A/AM;
+  
+end NumberDensityRelation_Base;

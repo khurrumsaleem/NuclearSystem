@@ -1,0 +1,6 @@
+within NuclearSystem.Kinetics.Components.ExtremeFastFission.BaseClasses;
+
+model CoreAlgEqn
+equation
+
+end CoreAlgEqn;
