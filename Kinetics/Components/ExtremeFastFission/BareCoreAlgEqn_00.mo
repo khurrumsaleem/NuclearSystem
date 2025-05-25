@@ -30,11 +30,14 @@ model BareCoreAlgEqn_00
     Placement(transformation(origin = {-98, 50}, extent = {{-20, -20}, {20, 20}}), iconTransformation(origin = {-110, -20}, extent = {{-10, -10}, {10, 10}})));
   
   Modelica.Blocks.Interfaces.RealOutput y_VCore if swCausalAlpha==NuclearSystem.Types.Switches.switch_causal_alpha.alpha2VCore  annotation(
-    Placement(transformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 60}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Interfaces.RealOutput y_alpha if swCausalAlpha==NuclearSystem.Types.Switches.switch_causal_alpha.VCore2alpha  annotation(
-    Placement(transformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}})));
-  
-    //**************************************************
+    Placement(transformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, 20}, extent = {{-10, -10}, {10, 10}})));
+  //**************************************************
+  Modelica.Blocks.Interfaces.RealOutput y_lambdaCoreFiss annotation(
+    Placement(transformation(origin = {120, 50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -20}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Interfaces.RealOutput y_mass annotation(
+    Placement(transformation(origin = {130, 60}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {110, -60}, extent = {{-10, -10}, {10, 10}})));
 initial equation
   
   //**************************************************
@@ -48,8 +51,13 @@ equation
   
   
   denMass= u_denMass;
-  
   //-----
+  
+  y_lambdaCoreFiss=lambdaCoreFiss;
+  y_mass= mass;
+  //-----
+  
+  
   if(swCausalAlpha==NuclearSystem.Types.Switches.switch_causal_alpha.alpha2VCore)then
     alpha= u_alpha;
     y_VCore= VCore;
@@ -62,7 +70,7 @@ equation
 annotation(
     defaultComponentName = "CoreAlg",
     Diagram(graphics),
-    Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -1}, extent = {{-100, 39}, {100, -39}}, textString = "Core Alg Eqn
+    Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {2, 3}, extent = {{-88, 31}, {88, -31}}, textString = "Core Alg Eqn
 Fast Fission"), Text(origin = {0, -114}, extent = {{-120, 8}, {120, -8}}, textString = "%name")}),
   experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.002));
 end BareCoreAlgEqn_00;

@@ -10,4 +10,6 @@ DiffAndCritCndi_Bare_ExtrFastFission_ex01
 DiffEqnExtrFastFiss_ex01
 ExtrFastFissAndCoreExp_ex01
 MassNumberDensityRelation_ex01
-BareCoreAlgEan_ex01
+BareCoreAlgDiffEqn_ex01
+BareCoreDiffEqn_ex01
+BareCoreAlgEqn_ex01

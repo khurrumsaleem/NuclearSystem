@@ -1,0 +1,34 @@
+within NuclearSystem.Kinetics.Examples.ComponentUsage;
+
+model BareCoreAlgDiffEqn_ex01
+  extends Modelica.Icons.Example;
+  Components.ExtremeFastFission.BareCoreAlgEqn_00 CoreAlg0(swCausalAlpha = Types.Switches.switch_causal_alpha.alpha2VCore) annotation(
+    Placement(transformation(origin = {-14, 52}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Sources.Constant const_denMass0(k = 18.71*1000) annotation(
+    Placement(transformation(origin = {-77, 18}, extent = {{-10, -10}, {10, 10}})));
+  Components.ExtremeFastFission.BareCoreAlgEqn_00 CoreAlg1(swCausalAlpha = Types.Switches.switch_causal_alpha.VCore2alpha) annotation(
+    Placement(transformation(origin = {-24, -4}, extent = {{-10, -10}, {10, 10}})));
+  Components.ExtremeFastFission.BareCoreDiffEqn_00 CoreDiffEqn annotation(
+    Placement(transformation(origin = {52, -4}, extent = {{-10, -10}, {10, 10}})));
+  Modelica.Blocks.Sources.Constant const_alpha0(k = 18.71*1000) annotation(
+    Placement(transformation(origin = {-73, 58}, extent = {{-10, -10}, {10, 10}})));
+equation
+  connect(const_denMass0.y, CoreAlg0.u_denMass) annotation(
+    Line(points = {{-66, 18}, {-44, 18}, {-44, 50}, {-25, 50}}, color = {0, 0, 127}));
+  connect(CoreAlg1.u_denMass, const_denMass0.y) annotation(
+    Line(points = {{-35, -6}, {-44, -6}, {-44, 18}, {-66, 18}}, color = {0, 0, 127}));
+  connect(CoreAlg1.y_alpha, CoreDiffEqn.u_alpha) annotation(
+    Line(points = {{-13, -2}, {41, -2}}, color = {0, 0, 127}));
+  connect(CoreAlg0.y_VCore, CoreDiffEqn.u_VCore0) annotation(
+    Line(points = {{-2, 58}, {20, 58}, {20, 2}, {41, 2}}, color = {0, 0, 127}));
+  connect(CoreAlg1.y_lambdaCoreFiss, CoreDiffEqn.u_lambdaCoreFiss) annotation(
+    Line(points = {{-13, -6}, {41, -6}}, color = {0, 0, 127}));
+  connect(CoreAlg0.y_mass, CoreDiffEqn.u_mass) annotation(
+    Line(points = {{-2, 46}, {6, 46}, {6, -10}, {42, -10}}, color = {0, 0, 127}));
+  connect(CoreDiffEqn.y_VCore, CoreAlg1.u_VCore) annotation(
+    Line(points = {{64, -4}, {78, -4}, {78, -36}, {-58, -36}, {-58, -10}, {-34, -10}}, color = {0, 0, 127}));
+  connect(const_alpha0.y, CoreAlg0.u_alpha) annotation(
+    Line(points = {{-62, 58}, {-24, 58}}, color = {0, 0, 127}));
+  annotation(
+    experiment(StartTime = 0, StopTime = 2e-6, Tolerance = 1e-06, Interval = 1e-10));
+end BareCoreAlgDiffEqn_ex01;
