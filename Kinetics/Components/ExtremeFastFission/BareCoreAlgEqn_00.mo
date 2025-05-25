@@ -63,5 +63,6 @@ annotation(
     defaultComponentName = "CoreAlg",
     Diagram(graphics),
     Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -1}, extent = {{-100, 39}, {100, -39}}, textString = "Core Alg Eqn
-Fast Fission"), Text(origin = {0, -114}, extent = {{-120, 8}, {120, -8}}, textString = "%name")}));
+Fast Fission"), Text(origin = {0, -114}, extent = {{-120, 8}, {120, -8}}, textString = "%name")}),
+  experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.002));
 end BareCoreAlgEqn_00;
