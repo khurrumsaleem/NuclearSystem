@@ -13,7 +13,7 @@ model BareCoreDiffEqn_00
   parameter Real denNneu0_par=1;
   parameter units.Energy Efiss_par=180*10^6*conv.factor_eV2J();
   parameter units.Velocity vNeutron_par = CmnConsts.vNeuFree_Fission_1MeV;
-  Real gamma_par=1/3;
+  parameter Real gamma_par=1/3;
   
   /******************************
                 Internal objects

@@ -20,7 +20,8 @@ model BareCoreAlgEqn_Base
   Real nuNeu;
   
   Real denNNuke "nuke number density";
-  Real alpha(start=alphaInit);
+  Real alpha(min=0, start=alphaInit);
+  Real alphaTemp(min=0, start=alphaInit);
   
   Real lambdaCoreFiss "mean free path for neutrons btwn fissions";
   Real lambdaCoreTrans "transport mean free path for neutrons";
@@ -28,11 +29,13 @@ model BareCoreAlgEqn_Base
   
   
   units.Length dCore(start=0.05);
-  units.Length RCore(start=0.05);
+  
+  units.Length RCore(min=0, start=0.05);
   
   units.Volume VCore;
   Real Nnuke;
   
+initial equation
   
 equation
   
@@ -44,9 +47,11 @@ equation
   sigmaT= sigmaF + sigmaEl;
   lambdaCoreFiss= 1/(sigmaF*denNNuke);
   lambdaCoreTrans= 1/(sigmaT*denNNuke);
-  dCore= sqrt((lambdaCoreFiss*lambdaCoreTrans)/(3*(-alpha+nuNeu-1)));
   
+  dCore= sqrt((lambdaCoreFiss*lambdaCoreTrans)/(3*(-alphaTemp+nuNeu-1)));
   (dCore/RCore)*1.0/tan(dCore/RCore) + (3*RCore/(2*lambdaCoreTrans))*(dCore/RCore) - 1 = 0;
+  
+  alpha=max(alphaTemp, 0);
   
   //-----
   VCore= 4/3*Modelica.Constants.pi*RCore^3;
