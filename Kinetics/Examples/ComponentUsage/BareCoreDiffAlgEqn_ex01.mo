@@ -2,9 +2,12 @@ within NuclearSystem.Kinetics.Examples.ComponentUsage;
 
 model BareCoreDiffAlgEqn_ex01
   extends Modelica.Icons.Example;
+  //
+  parameter Real s_denMass0=1;
+  //
   Components.ExtremeFastFission.BareCoreAlgEqn_00 CoreAlg0(swCausalAlpha = Types.Switches.switch_causal_alpha.alpha2VCore, swCausalMass = NuclearSystem.Types.Switches.switch_causal_mass.den2mass) annotation(
     Placement(transformation(origin = {-28, 66}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Sources.Constant const_denMass0(k = 18.71*1000) annotation(
+  Modelica.Blocks.Sources.Constant const_denMass0(k = s_denMass0* 18.71*1000) annotation(
     Placement(transformation(origin = {-75, 38}, extent = {{-10, -10}, {10, 10}})));
   Components.ExtremeFastFission.BareCoreAlgEqn_00 CoreAlg(swCausalAlpha = Types.Switches.switch_causal_alpha.VCore2alpha, swCausalMass = NuclearSystem.Types.Switches.switch_causal_mass.mass2den) annotation(
     Placement(transformation(origin = {24, 12}, extent = {{-10, -10}, {10, 10}})));
@@ -12,14 +15,6 @@ model BareCoreDiffAlgEqn_ex01
     Placement(transformation(origin = {72, 12}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Blocks.Sources.Constant const_alpha0(k = 0.9) annotation(
     Placement(transformation(origin = {-75, 72}, extent = {{-10, -10}, {10, 10}})));
-  NuclearSystem.Kinetics.Components.ExtremeFastFission.BareCoreAlgEqn_00 CoreAlg1(swCausalAlpha = Types.Switches.switch_causal_alpha.VCore2alpha, swCausalMass = NuclearSystem.Types.Switches.switch_causal_mass.mass2den) annotation(
-    Placement(transformation(origin = {26, -66}, extent = {{-10, -10}, {10, 10}})));
-  NuclearSystem.Kinetics.Components.ExtremeFastFission.BareCoreDiffEqn_00 CoreDiffEqn1(denNneu0_par = 292) annotation(
-    Placement(transformation(origin = {68, -66}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Sources.Constant const_mass(k = 0.8) annotation(
-    Placement(transformation(origin = {-39, -52}, extent = {{-10, -10}, {10, 10}})));
-  Modelica.Blocks.Sources.Constant const_V0(k = 0.05^3*Modelica.Constants.pi*4/3) annotation(
-    Placement(transformation(origin = {-39, -22}, extent = {{-10, -10}, {10, 10}})));
 equation
   connect(const_denMass0.y, CoreAlg0.u_denMass) annotation(
     Line(points = {{-64, 38}, {-46, 38}, {-46, 68}, {-39, 68}}, color = {0, 0, 127}));
@@ -37,18 +32,6 @@ equation
     Line(points = {{-64, 72}, {-39, 72}}, color = {0, 0, 127}));
   connect(CoreAlg0.y_mass, CoreAlg.u_mass) annotation(
     Line(points = {{-17, 60}, {0, 60}, {0, 10}, {13, 10}}, color = {0, 0, 127}));
-  connect(CoreAlg1.y_alpha, CoreDiffEqn1.u_alpha) annotation(
-    Line(points = {{37, -64}, {57, -64}}, color = {0, 0, 127}));
-  connect(CoreAlg1.y_lambdaCoreFiss, CoreDiffEqn1.u_lambdaCoreFiss) annotation(
-    Line(points = {{37, -68}, {57, -68}}, color = {0, 0, 127}));
-  connect(CoreDiffEqn1.y_VCore, CoreAlg1.u_VCore) annotation(
-    Line(points = {{79, -66}, {87, -66}, {87, -86}, {7, -86}, {7, -72}, {15, -72}}, color = {0, 0, 127}));
-  connect(const_mass.y, CoreAlg1.u_mass) annotation(
-    Line(points = {{-28, -52}, {-6, -52}, {-6, -68}, {15, -68}}, color = {0, 0, 127}));
-  connect(const_V0.y, CoreDiffEqn1.u_VCore0) annotation(
-    Line(points = {{-28, -22}, {42, -22}, {42, -60}, {57, -60}}, color = {0, 0, 127}));
-  connect(const_mass.y, CoreDiffEqn1.u_mass) annotation(
-    Line(points = {{-28, -52}, {50, -52}, {50, -72}, {58, -72}}, color = {0, 0, 127}));
   annotation(
-    experiment(StartTime = 0, StopTime = 1.2e-06, Tolerance = 1e-06, Interval = 1e-10));
+    experiment(StartTime = 0, StopTime = 1.2e-06, Tolerance = 1e-06, Interval = 1.00008e-10));
 end BareCoreDiffAlgEqn_ex01;

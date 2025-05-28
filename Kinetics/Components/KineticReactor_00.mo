@@ -16,8 +16,8 @@ model KineticReactor_00
       -----------------------------------*/
   parameter Real denNneu0_par = 1e14 "initial neutron density";
   parameter units.Volume Vol_par = 1.0;
-  parameter Real kFuelDens_par = 0.001 "corelation coefficient to manipulate design point power";
-  parameter Real denNnukeFuel_par = 0.05*(19*10^6/238)*conv.factor_mole2num() "nuclear number density, [num/m3]";
+  parameter Real s_FuelDens_par = 0.001 "corelation coefficient to manipulate design point power";
+  parameter Real denNnukeFuel_par = 0.05*(18.71*10^6/238)*conv.factor_mole2num() "nuke num density, [num/m3], denNNuke= denMass*const.N_A/AM";
   parameter units.Energy Efiss_par = 200*10^6*conv.factor_eV2J();
   parameter Real nu_par = 2.43 "average number of neutrons produced per fission";
   parameter units.Area sigmaF_par = 1.199*10^(-28) "microscopic fission cross section";
@@ -25,6 +25,7 @@ model KineticReactor_00
   parameter Integer nPrecursor_par = 6 "";
   parameter Real beta_par[nPrecursor_par] = {0.000215, 0.001424, 0.001274, 0.002568, 0.000748, 0.000273};
   parameter units.DecayConstant lambda_par[nPrecursor_par] = {0.0126, 0.0337, 0.139, 0.325, 1.13, 3.5};
+  parameter units.Density denMassFuel_par=18.71*1000 "fuel mass density";
   //-------------------------
   parameter Boolean use_HeatTransfer = true
   "= true to use the HeatTransfer model"
@@ -59,8 +60,8 @@ model KineticReactor_00
   units.Volume Vol "";
   units.Power pwr "power";
   units.Energy engy "";
-  Real engy_TNTeq;
-  units.Time T "characteristic time(or time constant in linear system)";
+  Real engy_TNTeq "Ton (4.2 × 10^12 Joule/kt)";
+  units.Time Tchar "characteristic time(or time constant in linear system)";
   Real rho_dollar "rho/betaTotal";
   Real rho_cent "rho/betaTotal*100";
   //---
@@ -73,6 +74,9 @@ model KineticReactor_00
   discrete Real rho0 "initial reactivity";
   discrete Real denNnukeFuel0 "num density of nuclear fuel";
   discrete Real nNukeFuel0 "initial num of nuclei";
+  discrete units.Volume Vol0;
+  discrete units.Mass massFuel0;
+  discrete units.Power denPwr0 "power density, W/m3";
   //---
   Real pwrRel0 "pwr/pwr0";
   Real denNneuRel0 "denNneu/denNneu0";
@@ -88,6 +92,7 @@ model KineticReactor_00
   Real lambdaNC[nPrecursor_par];
   units.NeutronNumberDensity SIGMA_lambdaC;
   Real SIGMA_lambdaNC;
+  units.Power denPwr "power density, W/m3";
   //---
   /*-----------------------------------
       interfaces
@@ -109,16 +114,22 @@ model KineticReactor_00
     Placement(transformation(origin = {110, 40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, 40}, extent = {{-5, -5}, {5, 5}})));
   Modelica.Blocks.Interfaces.RealOutput y_derNneuqNneu annotation(
     Placement(transformation(origin = {110, 60}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, 60}, extent = {{-5, -5}, {5, 5}})));
+  Modelica.Blocks.Interfaces.RealOutput y_massFuel0 annotation(
+    Placement(transformation(origin = {120, -50}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, -80}, extent = {{-5, -5}, {5, 5}})));
 
   //**********************************************************************
 initial equation
   pwr0 = pwr;
+  denPwr0= denPwr;
+  denPwr0= denPwr;
   LAMBDA0 = LAMBDA;
   nNeu0 = denNneu0*Vol;
   nNukeFuel0= denNnukeFuel0*Vol;
 //----
   denNneu0 = denNneu0_par;
   denNnukeFuel0= denNnukeFuel_par;
+  Vol0= Vol;
+  massFuel0= Vol0*denMassFuel_par;
 //----
   denNneu = denNneu0;
   for i in 1:nPrecursor_par loop
@@ -155,11 +166,14 @@ equation
     denNneu0 = denNneu;
 //-----
     pwr0 = pwr;
+    denPwr0= denPwr;
     LAMBDA0 = LAMBDA;
     nNeu0 = nNeu;
     rho0 = rho;
     denNnukeFuel0= denNnukeFuel;
     nNukeFuel0= nNukeFuel;
+    Vol0= Vol;
+    massFuel0= Vol0*denMassFuel_par;
     for i in 1:nPrecursor_par loop
       C0[i]=C[i];
       nC0[i]=nC[i];
@@ -171,12 +185,13 @@ equation
   y_pwrRel0 = pwrRel0;
   y_der_nNeu= der(nNeu);
   y_derNneuqNneu= derNneuqNneu;
+  y_massFuel0=massFuel0;
   
   if (use_HeatTransfer == true) then
     heatPort.Q_flow= -1.0*pwr;
   end if;
 //----------
-  SIGMAf = sigmaF_par*(denNnukeFuel*kFuelDens_par);
+  SIGMAf = sigmaF_par*(denNnukeFuel*s_FuelDens_par);
   rho = (kEff - 1)/kEff;
   LAMBDA = 1/(nu*SIGMAf*v);
 //-----
@@ -205,10 +220,10 @@ equation
   pwr = der(engy);
 //-----
   engy_TNTeq = engy/(4.184*10^9);
-  if (0.0 < abs(rho-betaTotal)) then
-    T = LAMBDA/(rho-betaTotal);
+  if noEvent(0.0 < abs(rho-betaTotal)) then
+    Tchar = LAMBDA/(rho-betaTotal);
   else
-    T = 0.0;
+    Tchar = 0.0;
   end if;
 //-----
   derNneuqNneu= der(nNeu)/nNeu;
@@ -216,6 +231,7 @@ equation
   pwrRel0 = pwr/pwr0;
   rho_dollar= rho/betaTotal;
   rho_cent= rho_dollar*100.0;
+  denPwr= pwr/Vol;
 //----------
   annotation(
     defaultComponentName = "PtRctr",

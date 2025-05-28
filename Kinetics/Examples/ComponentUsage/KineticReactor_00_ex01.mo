@@ -14,7 +14,7 @@ model KineticReactor_00_ex01
     Placement(transformation(origin = {-90, 6}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 288.15) annotation(
     Placement(transformation(origin = {90, 6}, extent = {{10, -10}, {-10, 10}})));
-  Components.KineticReactor_00 PtRctr annotation(
+  Components.KineticReactor_00 PtRctr(switchInit_derDenNneu = NuclearSystem.Types.Switches.switch_initialization.Free)  annotation(
     Placement(transformation(origin = {-51, 6}, extent = {{-17, -17}, {17, 17}})));
   Modelica.Blocks.Interaction.Show.RealValue realValue(significantDigits = 4) annotation(
     Placement(transformation(origin = {5, -32}, extent = {{-12, -10}, {12, 10}})));
