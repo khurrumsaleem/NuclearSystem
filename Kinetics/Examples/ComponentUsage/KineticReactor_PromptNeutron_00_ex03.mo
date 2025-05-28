@@ -39,11 +39,11 @@ model KineticReactor_PromptNeutron_00_ex03
     Placement(transformation(origin = {-3, -10}, extent = {{-4, -4}, {4, 4}}, rotation = -90)));
   Modelica.Blocks.Math.Gain gain1(k = 1e-6) annotation(
     Placement(transformation(origin = {66, -10}, extent = {{-4, -4}, {4, 4}}, rotation = -90)));
-  Modelica.Blocks.Sources.Pulse pulse_u_rho(amplitude = 0.9, width = 1e-6, period = 1, nperiod = 1, offset = 0, startTime = 1e-9) annotation(
+  Modelica.Blocks.Sources.Pulse pulse_u_rho(amplitude = 0.9, width = 1e-8, period = 1, nperiod = 1, offset = 0, startTime = 1e-9) annotation(
     Placement(transformation(origin = {-108, 6}, extent = {{-10, -10}, {10, 10}})));
   Components.ExtremeFastFission.CoreExpDiffEqn_00 CoreExp annotation(
     Placement(transformation(origin = {-72, -60}, extent = {{10, -10}, {-10, 10}})));
-  Modelica.Blocks.Sources.Constant const_Vol0(k = 1) annotation(
+  Modelica.Blocks.Sources.Constant const_Vol0(k = 0.1^3*4/3*Modelica.Constants.pi) annotation(
     Placement(transformation(origin = {-45, -48}, extent = {{6, -6}, {-6, 6}}, rotation = -0)));
 equation
   connect(PtRctr.y_pwrRel0, realValue_pwr.numberPort) annotation(
@@ -81,7 +81,7 @@ equation
   connect(PtRctr.y_pwr, CoreExp.u_rateEngy) annotation(
     Line(points = {{-38, -2}, {-24, -2}, {-24, -66}, {-60, -66}}, color = {0, 0, 127}));
   annotation(
-    experiment(StartTime = 0, StopTime = 2e-06, Tolerance = 1e-06, Interval = 1.0005e-09),
+    experiment(StartTime = 0, StopTime = 2e-06, Tolerance = 1e-06, Interval = 1e-08),
     Diagram(graphics = {Text(origin = {2, 39}, extent = {{-24, 7}, {24, -7}}, textString = "heat capacity of 
 1.0 ton iron", horizontalAlignment = TextAlignment.Left), Text(origin = {43, -32}, extent = {{-11, 4}, {11, -4}}, textString = "[MW]"), Text(origin = {4, -26}, extent = {{-14, 6}, {14, 0}}, textString = "Reactor power", horizontalAlignment = TextAlignment.Left), Text(origin = {15, -54}, extent = {{-19, 12}, {19, 0}}, textString = "Reactor power
 relative to initial", horizontalAlignment = TextAlignment.Left), Text(origin = {-56, 35}, extent = {{-24, 7}, {24, -7}}, textString = "Point Reactor", horizontalAlignment = TextAlignment.Left)}, coordinateSystem(extent = {{-120, -100}, {100, 100}})));
