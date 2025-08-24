@@ -1,6 +1,6 @@
 within NuclearSystem.Kinetics.Examples.ComponentUsage;
 
-model KineticReactor_00_ex01
+model KineticReactor_00_ex03
   extends Modelica.Icons.Example;
   //----------
   parameter Modelica.Units.SI.Temperature TcontourMin = 0 "";
@@ -11,10 +11,10 @@ model KineticReactor_00_ex01
   parameter Real arrowHeatFlowMax = 40;
   //----------
   Modelica.Blocks.Sources.Step step_rho(height = 0.000670, offset = 0, startTime = 10) annotation(
-    Placement(transformation(origin = {-90, 6}, extent = {{-10, -10}, {10, 10}})));
+    Placement(transformation(origin = {-100, 6}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T = 288.15) annotation(
     Placement(transformation(origin = {90, 6}, extent = {{10, -10}, {-10, 10}})));
-  Components.KineticReactor_00 PtRctr(switchInit_derDenNneu = NuclearSystem.Types.Switches.switch_initialization.Free)  annotation(
+  Components.KineticReactor_00 PtRctr(switchInit_derDenNneu = Types.Switches.switch_initialization.Free) annotation(
     Placement(transformation(origin = {-51, 6}, extent = {{-17, -17}, {17, 17}})));
   Modelica.Blocks.Interaction.Show.RealValue realValue(significantDigits = 4) annotation(
     Placement(transformation(origin = {5, -32}, extent = {{-12, -10}, {12, 10}})));
@@ -27,7 +27,7 @@ model KineticReactor_00_ex01
   Modelica.Blocks.Interaction.Show.RealValue realValue1(significantDigits = 4) annotation(
     Placement(transformation(origin = {74, -20}, extent = {{-9, -6}, {9, 6}})));
   Modelica.Blocks.Sources.Constant const_Gc(k = 100) annotation(
-    Placement(transformation(origin = {36, 40}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
+    Placement(transformation(origin = {50, 44}, extent = {{-6, -6}, {6, 6}}, rotation = -90)));
   HeatTransferComponents.Sensors.Temperature_degC_DispColor00 TemperatureDegC(valMin = TcontourMin, valMax = TcontourMax) annotation(
     Placement(transformation(origin = {88, 14}, extent = {{-12, -3}, {12, 3}})));
   Modelica.Blocks.Math.Gain gain(k = 1e-6) annotation(
@@ -38,14 +38,11 @@ model KineticReactor_00_ex01
     Placement(transformation(origin = {3, -64}, extent = {{-17, -9}, {17, 9}})));
   HeatTransferComponents.Common.ConvectionArrowQflow convection annotation(
     Placement(transformation(origin = {36, 6}, extent = {{-10, -10}, {10, 10}})));
-
 initial equation
-  PtRctr.Vol_par=2;
-  
-  
+  PtRctr.Vol_par = 2;
 equation
   connect(step_rho.y, PtRctr.u_rho) annotation(
-    Line(points = {{-79, 6}, {-70, 6}}, color = {0, 0, 127}));
+    Line(points = {{-89, 6}, {-70, 6}}, color = {0, 0, 127}));
   connect(PtRctr.heatPort, heatFlowSensor.port_a) annotation(
     Line(points = {{-34, 6}, {-20, 6}}, color = {191, 0, 0}, thickness = 1.5));
   connect(heatFlowSensor.port_b, HeatCapacitor.port) annotation(
@@ -69,10 +66,10 @@ equation
   connect(convection.fluid, heatFlowSensor1.port_a) annotation(
     Line(points = {{46, 6}, {56, 6}}, color = {191, 0, 0}, thickness = 1.5));
   connect(const_Gc.y, convection.Gc) annotation(
-    Line(points = {{36, 33}, {36, 16}}, color = {0, 0, 127}));
+    Line(points = {{50, 38}, {50, 30}, {36, 30}, {36, 16}}, color = {0, 0, 127}));
   annotation(
-    experiment(StartTime = 0, StopTime = 40, Tolerance = 1e-06, Interval = 0.01),
+    experiment(StartTime = 0, StopTime = 30, Tolerance = 1e-06, Interval = 0.002),
     Diagram(graphics = {Text(origin = {2, 39}, extent = {{-24, 7}, {24, -7}}, textString = "heat capacity of 
 1.0 ton iron", horizontalAlignment = TextAlignment.Left), Text(origin = {31, -32}, extent = {{-11, 4}, {11, -4}}, textString = "[MW]"), Text(origin = {4, -26}, extent = {{-14, 6}, {14, 0}}, textString = "Reactor power", horizontalAlignment = TextAlignment.Left), Text(origin = {1, -58}, extent = {{-19, 12}, {19, 0}}, textString = "Reactor power
-relative to initial", horizontalAlignment = TextAlignment.Left), Text(origin = {-54, 31}, extent = {{-24, 7}, {24, -7}}, textString = "Point Reactor", horizontalAlignment = TextAlignment.Left)}));
-end KineticReactor_00_ex01;
+relative to initial", horizontalAlignment = TextAlignment.Left), Text(origin = {-54, 31}, extent = {{-24, 7}, {24, -7}}, textString = "Point Reactor", horizontalAlignment = TextAlignment.Left)}, coordinateSystem(extent = {{-120, -100}, {120, 100}})));
+end KineticReactor_00_ex03;
