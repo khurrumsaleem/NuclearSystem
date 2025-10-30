@@ -1,0 +1,7 @@
+within NuclearSystem.Kinetics.Examples.EngineeringStudyModels;
+
+model FissionExplosionCorrelation
+  extends Modelica.Icons.Example;
+equation
+
+end FissionExplosionCorrelation;

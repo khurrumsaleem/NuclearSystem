@@ -1,13 +1,12 @@
-within NuclearSystem.Kinetics.Examples.EngineeringStudyModels;
+within NuclearSystem.Kinetics.Components.ExtremeFastFission;
 
-model FissionExplosionDeviceCore_ex01
-  extends Modelica.Icons.Example;
+model FissionExplosionDeviceCoreWithReset00
   //******************************
   import units = Modelica.Units.SI;
   import conv = NuclearSystem.Constants.UnitConversions;
   /******************************
-                    Parameters
-                    ******************************/
+                  Parameters
+                  ******************************/
   parameter Real nNeutInit = 1;
   parameter Real NcoreInit = nNeutInit/(4/3*Modelica.Constants.pi*rInit_par^3) "neutron number density, []";
   parameter Real kNnukDen = 1.0 "multiplication factor onto nuclear number density";
@@ -26,8 +25,8 @@ model FissionExplosionDeviceCore_ex01
   parameter units.Time tDet_par = 0.0e-7 "detonation timing";
   parameter units.Pressure pCoreInit = 100*1000 "initial core pressure";
   /******************************
-                    Variables
-                    ******************************/
+                  Variables
+                  ******************************/
   Real dCore "size of critical radius";
   Real lambdaCoreTrans "transport mean free path for neutrons";
   Real sigmaF "fission cross-section of fissile core material";
@@ -38,6 +37,7 @@ model FissionExplosionDeviceCore_ex01
   units.Volume volCore "";
   Real n "nuclear number density";
   Real lambdaCoreFiss "mean free path for neutrons btwn fissions";
+  Real alphaTemp(min = 0.0) "separation of variables in solving diffusion equation";
   Real alpha(min = 0.0) "separation of variables in solving diffusion equation";
   units.Length r "";
   units.Pressure pCore "";
@@ -52,12 +52,22 @@ model FissionExplosionDeviceCore_ex01
   Real FissRate "rate of fission, times/sec";
   Real nCumFiss "cumulative number of fissions";
   units.Time tAfterDet "time after detonation";
+  discrete Real alphaInit;
   /******************************
-                    Internal objects
-                ******************************/
+                  Internal objects
+    ******************************/
   Constants.Common CmnConsts;
+  /******************************
+                  interface
+    ******************************/
+  Modelica.Blocks.Interfaces.BooleanInput u_ignition annotation(
+    Placement(transformation(origin = {0, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {0, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
 protected
-  parameter Real volCoreInit(fixed = false) annotation(
+  /*
+    parameter Real alphaInit(fixed = false) annotation(
+      HideResult = false);
+    */
+  parameter units.Volume volCoreInit(fixed = false) annotation(
     HideResult = false);
   parameter units.Length rInit(fixed = false) annotation(
     HideResult = false);
@@ -66,7 +76,6 @@ protected
   parameter units.Time tDet(fixed = false) "time of detonation" annotation(
     HideResult = false);
 initial equation
-/**/
   r = rInit_par;
   rInit = rInit_par;
   volCoreInit = 4.0/3.0*Modelica.Constants.pi*rInit_par^3.0;
@@ -74,9 +83,16 @@ initial equation
   mCore = rhoCore*volCoreInit;
   tDet = tDet_par;
   pCore = pCoreInit;
+  alphaInit = alpha;
 algorithm
 
 equation
+  when (time == 0) then
+    alphaInit = alpha;
+  end when;
+  when (u_ignition == true) then
+    reinit(alpha, alphaInit);
+  end when;
   if (time <= tDet) then
     tAfterDet = 0.0;
   else
@@ -99,9 +115,14 @@ equation
   lambdaCoreTrans = 1.0/(sigmaT*n);
   tau = lambdaCoreFiss/vNeutron;
 //-----
-  dCore = sqrt((lambdaCoreFiss*lambdaCoreTrans)/(3.0*(-alpha + nu - 1.0)));
+  dCore = sqrt((lambdaCoreFiss*lambdaCoreTrans)/(3.0*(-alphaTemp + nu - 1.0)));
   (r/dCore)*1.0/tan(r/dCore) + (3*dCore/(2.0*lambdaCoreTrans))*(r/dCore) - 1.0 = 0.0;
 //-----
+  if (alphaTemp <= 0) then
+    alpha = 0.0;
+  else
+    alpha = alphaTemp;
+  end if;
 //-----
   pCore = gamma*Eemit/volCore;
   der(Eemit) = (NcoreInit*volCoreInit*Efiss/tau)*exp((alpha/tau)*tAfterDet);
@@ -113,5 +134,7 @@ equation
   FissRate = (NcoreInit*volCoreInit/tau)*exp((alpha/tau)*tAfterDet);
   der(nCumFiss) = FissRate;
   annotation(
-    experiment(StartTime = 0, StopTime = 1e-06, Tolerance = 1e-06, Interval = 1e-10));
-end FissionExplosionDeviceCore_ex01;
+    defaultComponentName = "FissionCore",
+    Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -114}, extent = {{-100, 12}, {100, -12}}, textString = "%name")}));
+
+end FissionExplosionDeviceCoreWithReset00;

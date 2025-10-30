@@ -2,7 +2,7 @@ within NuclearSystem.Kinetics.Components.ExtremeFastFission;
 
 model FissionExplosionDeviceCore00
 
-  //******************************
+//******************************
   import units = Modelica.Units.SI;
   import conv = NuclearSystem.Constants.UnitConversions;
   /******************************
@@ -60,16 +60,11 @@ model FissionExplosionDeviceCore00
                 Internal objects
   ******************************/
   NuclearSystem.Constants.Common CmnConsts;
-  
-  
   /******************************
-                interface
-  ******************************/
-  Modelica.Blocks.Interfaces.BooleanInput u_ignition annotation(
-    Placement(transformation(origin = {0, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90), iconTransformation(origin = {0, 110}, extent = {{-10, -10}, {10, 10}}, rotation = -90)));
-  
-  
-  
+                          interface
+            ******************************/
+  Modelica.Blocks.Interfaces.RealOutput y_Eemit_TNTeq annotation(
+    Placement(transformation(origin = {105, 40}, extent = {{-5, -5}, {5, 5}}), iconTransformation(origin = {105, 40}, extent = {{-5, -5}, {5, 5}})));
 protected
   /*
   parameter Real alphaInit(fixed = false) annotation(
@@ -84,8 +79,15 @@ protected
     HideResult = false);
   parameter units.Time tDet(fixed = false) "time of detonation" annotation(
     HideResult = false);
-  
-  
+public
+  Modelica.Blocks.Interfaces.RealOutput y_Eemit annotation(
+    Placement(transformation(origin = {105, 80}, extent = {{-5, -5}, {5, 5}}), iconTransformation(origin = {105, 80}, extent = {{-5, -5}, {5, 5}})));
+  Modelica.Blocks.Interfaces.RealOutput y_pCore annotation(
+    Placement(transformation(origin = {105, 0}, extent = {{-5, -5}, {5, 5}}), iconTransformation(origin = {105, 0}, extent = {{-5, -5}, {5, 5}})));
+  Modelica.Blocks.Interfaces.RealOutput y_vCoreExp annotation(
+    Placement(transformation(origin = {105, -40}, extent = {{-5, -5}, {5, 5}}), iconTransformation(origin = {105, -40}, extent = {{-5, -5}, {5, 5}})));
+  Modelica.Blocks.Interfaces.RealOutput y_alpha annotation(
+    Placement(transformation(origin = {105, -80}, extent = {{-5, -5}, {5, 5}}), iconTransformation(origin = {105, -80}, extent = {{-5, -5}, {5, 5}})));
 initial equation
   r = rInit_par;
   rInit = rInit_par;
@@ -102,10 +104,6 @@ algorithm
 equation
   when(time==0)then
     alphaInit=alpha;
-  end when;
-  
-  when(u_ignition==true)then
-    reinit(alpha, alphaInit);
   end when;
   
   
@@ -149,9 +147,19 @@ equation
   Eemit_TNTeq = Eemit/(4.184*10^9);
   FissRate = (NcoreInit*volCoreInit/tau)*exp((alpha/tau)*tAfterDet);
   der(nCumFiss) = FissRate;
-
+  
+  //-----
+  y_alpha= alpha;
+  y_Eemit= Eemit;
+  y_Eemit_TNTeq= Eemit_TNTeq;
+  y_pCore= pCore;
+  y_vCoreExp= vCoreExp;
+  
+  
   annotation(
     defaultComponentName = "FissionCore",
-  Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -114}, extent = {{-100, 12}, {100, -12}}, textString = "%name")}));
+  Icon(graphics = {Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -115}, extent = {{-100, 11}, {100, -11}}, textString = "%name")}, coordinateSystem(preserveAspectRatio = false)),
+  experiment(StartTime = 0, StopTime = 1e-6, Tolerance = 1e-06, Interval = 1e-09),
+  Diagram(graphics = {Text(origin = {0, -114}, extent = {{-100, 10}, {100, -10}}, textString = "%name")}));
 
 end FissionExplosionDeviceCore00;
