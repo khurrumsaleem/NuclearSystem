@@ -15,8 +15,9 @@ model KineticReactor_00
       parameters
       -----------------------------------*/
   parameter Real denNneu0_par = 1e14 "initial neutron density";
+  parameter Real PHI0_par=1e15 "neutron flux, 1/(m2*s)";
   parameter units.Volume Vol_par = 1.0;
-  parameter Real s_FuelDens_par = 0.001 "corelation coefficient to manipulate design point power";
+  parameter Real s_FuelDens_par = 1.0 "corelation coefficient to manipulate design point power";
   parameter Real denNnukeFuel_par = 0.05*(18.71*10^6/238)*conv.factor_mole2num() "nuke num density, [num/m3], denNNuke= denMass*const.N_A/AM";
   parameter units.Energy Efiss_par = 200*10^6*conv.factor_eV2J();
   parameter Real nu_par = 2.43 "average number of neutrons produced per fission";
@@ -36,6 +37,9 @@ model KineticReactor_00
   
   //-------------------------
   parameter NuclearSystem.Types.Switches.switch_initialization switchInit_derDenNneu= NuclearSystem.Types.Switches.switch_initialization.FixedInitial annotation (Dialog(tab="Initialization", group="Switches"));
+  
+  parameter NuclearSystem.Types.Switches.switch_causal_neutronFlux switchCausal_PHI0= NuclearSystem.Types.Switches.switch_causal_neutronFlux.den2PHI annotation (Dialog(group="Switches"));
+  
   
   parameter Real der_denNneu0_par = 0.0 if switchInit_derDenNneu==NuclearSystem.Types.Switches.switch_initialization.FixedInitial "initial der(neutron density)" annotation (Dialog(tab="Initialization", group="Initial"));
   
@@ -68,6 +72,7 @@ model KineticReactor_00
   discrete units.Power pwr0 "pwr at t=0";
   discrete units.Time LAMBDA0 "neutron generation time, at time=0";
   discrete units.NeutronNumberDensity denNneu0;
+  discrete Real PHI0;
   discrete Real nNeu0 "initial num of neutron";
   discrete Real C0[nPrecursor_par];
   discrete Real nC0[nPrecursor_par];
@@ -102,7 +107,7 @@ model KineticReactor_00
   Modelica.Blocks.Interfaces.RealInput u_Vol if use_u_Vol "volume input" annotation(
     Placement(transformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {-110, 40}, extent = {{-10, -10}, {10, 10}})));
   //----------
-  Modelica.Blocks.Interfaces.RealOutput y_pwr(unit = "W", displayUnit = "W") "" annotation(
+  Modelica.Blocks.Interfaces.RealOutput y_pwr(unit = "W") "" annotation(
     Placement(transformation(origin = {110, -40}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, -40}, extent = {{-5, -5}, {5, 5}})));
   Modelica.Blocks.Interfaces.RealOutput y_pwrRel0 annotation(
     Placement(transformation(origin = {110, -60}, extent = {{-10, -10}, {10, 10}}), iconTransformation(origin = {105, -60}, extent = {{-5, -5}, {5, 5}})));
@@ -126,12 +131,19 @@ initial equation
   nNeu0 = denNneu0*Vol;
   nNukeFuel0= denNnukeFuel0*Vol;
 //----
-  denNneu0 = denNneu0_par;
+  
+  if(switchCausal_PHI0==NuclearSystem.Types.Switches.switch_causal_neutronFlux.PHI2den)then
+    PHI0=PHI0_par;
+  elseif(switchCausal_PHI0==NuclearSystem.Types.Switches.switch_causal_neutronFlux.den2PHI)then
+    denNneu0 = denNneu0_par;  
+  end if;
+  
   denNnukeFuel0= denNnukeFuel_par;
   Vol0= Vol;
   massFuel0= Vol0*denMassFuel_par;
 //----
   denNneu = denNneu0;
+  PHI=PHI0;
   for i in 1:nPrecursor_par loop
     C[i] = C0[i];
     der(C[i])=0.0;
@@ -164,6 +176,7 @@ equation
 //----------
   when (time == 0) then
     denNneu0 = denNneu;
+    PHI0= PHI;
 //-----
     pwr0 = pwr;
     denPwr0= denPwr;
@@ -237,4 +250,7 @@ equation
     defaultComponentName = "PtRctr",
     Icon(graphics = {Rectangle(extent = {{-100, 100}, {100, -100}}), Text(origin = {0, -118}, extent = {{-100, 10}, {100, -10}}, textString = "%name")}),
     experiment(StartTime = 0, StopTime = 1, Tolerance = 1e-06, Interval = 0.002));
+
+
+
 end KineticReactor_00;
