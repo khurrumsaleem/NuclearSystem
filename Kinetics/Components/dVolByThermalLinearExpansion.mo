@@ -70,8 +70,4 @@ equation
   dVol= dVolqVol0*Vol0;
   Vol=Vol0+dVol;
   
-  
-
-annotation(
-    defaultComponentName = "dVThExp",
-    Icon(graphics = {Text(origin = {0, -111}, extent = {{-120, 11}, {120, -11}}, textString = "%name"), Rectangle( fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, 
+end dVolByThermalLinearExpansion;
