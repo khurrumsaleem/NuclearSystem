@@ -70,22 +70,6 @@ model KineticReactor_00
   Real rho_cent "rho/betaTotal*100";
   units.Mass massFuel;
   //---
-  /*
-  discrete units.Power pwr0 "pwr at t=0";
-  discrete units.Time LAMBDA0 "neutron generation time, at time=0";
-  discrete units.NeutronNumberDensity denNneu0;
-  discrete Real PHI0;
-  discrete Real nNeu0 "initial num of neutron";
-  discrete Real C0[nPrecursor_par];
-  discrete Real nC0[nPrecursor_par];
-  discrete Real rho0 "initial reactivity";
-  discrete Real denNnukeFuel0 "num density of nuclear fuel";
-  discrete Real nNukeFuel0 "initial num of nuclei";
-  discrete units.Volume Vol0;
-  discrete units.Mass massFuel0;
-  discrete units.Power denPwr0 "power density, W/m3";
-  */
-  //---
   Real pwrRel0 "pwr/pwr0";
   Real denNneuRel0 "denNneu/denNneu0";
   Real Crel0[nPrecursor_par] "C/C0";
@@ -142,29 +126,30 @@ protected
   parameter units.Power denPwr0(fixed=false) "power density, W/m3" annotation(HideResult = false);
   
 initial equation
-  denNnukeFuel0= denNnukeFuel_par;
+  denNnukeFuel= denNnukeFuel_par;
   
   //----
+  /**/
   if(use_u_Vol==true)then
     Vol0= u_Vol;
   else
     Vol0 = Vol_par;
   end if;
   
+  
   //----
   if(switchCausal_PHI0==NuclearSystem.Types.Switches.switch_causal_neutronFlux.PHI2den)then
     PHI0=PHI0_par;
+    denNneu0=PHI0/v;
   elseif(switchCausal_PHI0==NuclearSystem.Types.Switches.switch_causal_neutronFlux.den2PHI)then
-    denNneu0 = denNneu0_par;  
+    denNneu0 = denNneu0_par; 
+    PHI0 = denNneu0*v;
   end if;
+  denNneu=denNneu0;
   
   //----
-  
-  //----
-  PHI0 = denNneu0*v;
   massFuel0= Vol0*denMassFuel_par;
-  nNeu0 = denNneu0*Vol;
-  nNukeFuel0= denNnukeFuel0*Vol;
+  nNeu0 = denNneu0*Vol0;
   
   //----
   pwr0 = pwr;
@@ -172,18 +157,23 @@ initial equation
   LAMBDA0 = LAMBDA;
   nNeu0 = nNeu;
   rho0 = rho;
+  Vol0=Vol;
   denNnukeFuel0= denNnukeFuel;
-  nNukeFuel0= nNukeFuel;
   for i in 1:nPrecursor_par loop
     C0[i]=C[i];
     nC0[i]=nC[i];
   end for;
+  
+  //nNukeFuel0= denNnukeFuel0*Vol0;
+  //nNukeFuel0= nNukeFuel;
+  
   
   //----------
   for i in 1:nPrecursor_par loop
     der(C[i])=0.0;
   end for;
   
+  //----
   if(switchInit_derDenNneu==NuclearSystem.Types.Switches.switch_initialization.FixedInitial)then
     der(denNneu)=0.0;
   end if;
@@ -192,15 +182,18 @@ initial equation
 algorithm
 //**********************************************************************
 equation
+  //-----
   for i in 1:nPrecursor_par loop
     beta[i] = beta_par[i];
     lambda[i] = lambda_par[i];
   end for;
   
+  //---
   nu = nu_par;
   v = v_par;
   sigmaF= sigmaF_par;
   
+  //---
   if(use_u_Vol==true)then
     Vol= u_Vol;
   else
@@ -208,27 +201,6 @@ equation
   end if;
   
   
-//----------
-/*
-  when (time == 0) then
-    denNneu0 = denNneu;
-    PHI0= PHI;
-
-    pwr0 = pwr;
-    denPwr0= denPwr;
-    LAMBDA0 = LAMBDA;
-    nNeu0 = nNeu;
-    rho0 = rho;
-    denNnukeFuel0= denNnukeFuel;
-    nNukeFuel0= nNukeFuel;
-    Vol0= Vol;
-    massFuel0= Vol0*denMassFuel_par;
-    for i in 1:nPrecursor_par loop
-      C0[i]=C[i];
-      nC0[i]=nC[i];
-    end for;
-  end when;
-*/
 
 //----------
   rho = u_rho;
@@ -249,6 +221,7 @@ equation
 //-
   for i in 1:nPrecursor_par loop
     der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i];
+    //der(C[i]) = beta[i]/LAMBDA*denNneu - lambda[i]*C[i];
     lambdaNC[i] = lambda[i]*nC[i];
     lambdaC[i] = lambda[i]*C[i];
 //-----
@@ -261,11 +234,15 @@ equation
   SIGMA_lambdaNC = sum(lambdaNC);
   
   der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
+  
+  der(denNneu)= ((rho - betaTotal)/LAMBDA)*denNneu + SIGMA_lambdaC;
+  //nNeu = denNneu*Vol;
+  
 //-----
   massFuel=massFuel0;
   nNukeFuel= nNukeFuel0;
-  denNnukeFuel= nNukeFuel/Vol;
-  nNeu = denNneu*Vol;
+  
+  nNukeFuel= denNnukeFuel*Vol;
   
   PHI = denNneu*v;
   pwr = Efiss_par*SIGMAf*PHI*Vol;

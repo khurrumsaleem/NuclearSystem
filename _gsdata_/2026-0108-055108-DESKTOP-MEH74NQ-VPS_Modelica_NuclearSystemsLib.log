@@ -1,0 +1,76 @@
+2026-01-08 05:51:09: Server: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.14
+2026-01-08 05:51:09: Server KEXes: sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,ext-info-s,kex-strict-s-v00@openssh.com
+2026-01-08 05:51:09: Server Host Keys: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
+2026-01-08 05:51:09: Chosen Host Key: ssh-ed25519
+2026-01-08 05:51:09: Ciphers: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+2026-01-08 05:51:09: MACs: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
+2026-01-08 05:51:10: Auth: start: publickey
+2026-01-08 05:51:10: Auth: publickey: no keys available
+2026-01-08 05:51:10: Auth: start: password
+2026-01-08 05:51:11: -- Analysis Started by On File Change, After Delay
+2026-01-08 05:51:11: R: State File has changed, so re-read it: sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/_gsdata_/_file_state_v4._gs
+2026-01-08 05:51:11: R: Reading State File sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/_gsdata_/_file_state_v4._gs
+2026-01-08 05:51:12: Changes: 24, Conflicts: 0, CopyTime: 0, FixState: 0, Errors: 0, All: 3215
+2026-01-08 05:51:12: Left to Right: Copy File: 24 
+2026-01-08 05:51:12: == Sync Started by On File Change, After Delay
+2026-01-08 05:51:12: ConnectCloned connected to file:///~grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-08 05:51:12: ConnectCloned connected to file:///~grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-08 05:51:12: ConnectCloned connected to file:///~grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-08 05:51:12: Server: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.14
+2026-01-08 05:51:12: Server: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.14
+2026-01-08 05:51:12: Server: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.14
+2026-01-08 05:51:12: Server KEXes: sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,ext-info-s,kex-strict-s-v00@openssh.com
+2026-01-08 05:51:12: Server Host Keys: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
+2026-01-08 05:51:12: Chosen Host Key: ssh-ed25519
+2026-01-08 05:51:12: Ciphers: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+2026-01-08 05:51:12: MACs: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
+2026-01-08 05:51:12: Server KEXes: sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,ext-info-s,kex-strict-s-v00@openssh.com
+2026-01-08 05:51:12: Server Host Keys: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
+2026-01-08 05:51:12: Chosen Host Key: ssh-ed25519
+2026-01-08 05:51:12: Ciphers: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+2026-01-08 05:51:12: MACs: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
+2026-01-08 05:51:12: Server KEXes: sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,ext-info-s,kex-strict-s-v00@openssh.com
+2026-01-08 05:51:12: Server Host Keys: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
+2026-01-08 05:51:12: Chosen Host Key: ssh-ed25519
+2026-01-08 05:51:12: Ciphers: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+2026-01-08 05:51:12: MACs: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
+2026-01-08 05:51:12: Auth: start: publickey
+2026-01-08 05:51:12: Auth: publickey: no keys available
+2026-01-08 05:51:12: Auth: start: password
+2026-01-08 05:51:12: Auth: start: publickey
+2026-01-08 05:51:12: Auth: publickey: no keys available
+2026-01-08 05:51:12: Auth: start: password
+2026-01-08 05:51:12: Auth: start: publickey
+2026-01-08 05:51:12: Auth: publickey: no keys available
+2026-01-08 05:51:12: Auth: start: password
+2026-01-08 05:51:13: GsConnectAndSetRoot1 connected to sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-08 05:51:13: GsConnectAndSetRoot1 connected to sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-08 05:51:13: GsConnectAndSetRoot1 connected to sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-08 05:51:14: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/COMMIT_EDITMSG' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/COMMIT_EDITMSG' (11)
+2026-01-08 05:51:14: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/logs/HEAD' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/logs/HEAD' (10,090)
+2026-01-08 05:51:14: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/index' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/index' (135,140)
+2026-01-08 05:51:14: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/00/dfc42dd743250334f4752e058a13231db84e3b' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/00/dfc42dd743250334f4752e058a13231db84e3b' (479)
+2026-01-08 05:51:14: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/23/1eba98fba70c3ca619ccfc71bc3d9a0217aa74' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/23/1eba98fba70c3ca619ccfc71bc3d9a0217aa74' (198)
+2026-01-08 05:51:14: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/27/f131a6160e53497eb16bc86fad3e1df5d49449' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/27/f131a6160e53497eb16bc86fad3e1df5d49449' (162)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/30/8d5a4cdff31ca869dedd19ac8849f329d0c065' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/30/8d5a4cdff31ca869dedd19ac8849f329d0c065' (3,224)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/3c/7c9bc00bbb9362e9e4e08ce036c53de004eb6d' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/3c/7c9bc00bbb9362e9e4e08ce036c53de004eb6d' (250)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/5d/e959868ec489945b93e5257146399ba11288fa' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/5d/e959868ec489945b93e5257146399ba11288fa' (490)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/74/d2adcd8bdb0608fab735889d2266989cf4027d' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/74/d2adcd8bdb0608fab735889d2266989cf4027d' (673)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/86/683c9e503d652d5e28216b6f317167110cbc17' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/86/683c9e503d652d5e28216b6f317167110cbc17' (787)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/88/c708cb621837d6cfbcb9da6b31b8b31051280a' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/88/c708cb621837d6cfbcb9da6b31b8b31051280a' (277)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/ab/553973a90f2f6e9f86836413d081d25ef1df02' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/ab/553973a90f2f6e9f86836413d081d25ef1df02' (172)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/b9/69a659ba2bad490b3be3954cf96fd52bcbbf41' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/b9/69a659ba2bad490b3be3954cf96fd52bcbbf41' (4,545)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/d7/741a9f32e47d914a3e39f32a455bde16f3bbdf' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/d7/741a9f32e47d914a3e39f32a455bde16f3bbdf' (20,761)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/cf/3b7cddf106f3e406e7c5fab410560a032b367c' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/cf/3b7cddf106f3e406e7c5fab410560a032b367c' (1,011)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/c4/0226ec1887504b87073e5fd96a1cd7e86bf3f1' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/c4/0226ec1887504b87073e5fd96a1cd7e86bf3f1' (141,072)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/db/9ecffa27e9d005cebff842eab4670b0b3e0fdf' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/db/9ecffa27e9d005cebff842eab4670b0b3e0fdf' (1,930)
+2026-01-08 05:51:15: > Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/pack/pack-a8187e931d4692c35c39c14d85fa3ee668f297a5.pack' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/pack/pack-a8187e931d4692c35c39c14d85fa3ee668f297a5.pack' (5,385,365)
+2026-01-08 05:51:15: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/f6/bc0410848bc989c80aa104953c2256672805c7' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/f6/bc0410848bc989c80aa104953c2256672805c7' (171)
+2026-01-08 05:51:16: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/fa/862455c1abdfc3d95807d2513ea2f967972282' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/fa/862455c1abdfc3d95807d2513ea2f967972282' (778)
+2026-01-08 05:51:16: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/sourcetreeconfig.json' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/sourcetreeconfig.json' (831)
+2026-01-08 05:51:16: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/logs/refs/heads/main' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/logs/refs/heads/main' (10,090)
+2026-01-08 05:51:16: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/refs/heads/main' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/refs/heads/main' (41)
+2026-01-08 05:51:20: < Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/pack/pack-a8187e931d4692c35c39c14d85fa3ee668f297a5.pack' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/.git/objects/pack/pack-a8187e931d4692c35c39c14d85fa3ee668f297a5.pack' (5,385,365)
+2026-01-08 05:51:20: Save State File C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/_gsdata_/_file_state_v4._gs
+2026-01-08 05:51:21: Save State File sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/_gsdata_/_file_state_v4._gs
+2026-01-08 05:51:31: == Sync Complete. Time: 00:00:19, Speed: 641.85 KB/s, OK: 24, Errors: 0
