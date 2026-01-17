@@ -59,7 +59,7 @@ model KineticReactor_00
   units.MacroscopicCrossSection SIGMAf "macroscopic fission cross section";
   units.Velocity v "neutron velocity";
   Real rho "reactivity";
-  Real kEff;
+  //Real kEff;
   Real PHI "neutron flux, 1/(m2*s)";
   units.Volume Vol "";
   units.Power pwr "power";
@@ -85,6 +85,8 @@ model KineticReactor_00
   units.NeutronNumberDensity SIGMA_lambdaC;
   Real SIGMA_lambdaNC;
   units.Power denPwr "power density, W/m3";
+  Real derVol "m3/s, time derivative of core volume";
+  
   //---
   /*-----------------------------------
       interfaces
@@ -145,7 +147,7 @@ initial equation
     denNneu0 = denNneu0_par; 
     PHI0 = denNneu0*v;
   end if;
-  denNneu=denNneu0;
+  //denNneu=denNneu0;
   
   //----
   massFuel0= Vol0*denMassFuel_par;
@@ -169,14 +171,20 @@ initial equation
   
   
   //----------
+  //for i in 1:nPrecursor_par loop
+    //der(C[i])=0.0;
+  //  der(nC[i])=0.0;
+  //end for;
+  
   for i in 1:nPrecursor_par loop
-    der(C[i])=0.0;
+    nC[i] = beta_par[i] / (LAMBDA0 * lambda_par[i]) * nNeu0;
   end for;
   
   //----
   if(switchInit_derDenNneu==NuclearSystem.Types.Switches.switch_initialization.FixedInitial)then
     der(denNneu)=0.0;
   end if;
+  
   
 //**********************************************************************
 algorithm
@@ -215,28 +223,30 @@ equation
   end if;
 //----------
   SIGMAf = sigmaF_par*(denNnukeFuel*s_FuelDens_par);
-  rho = (kEff - 1)/kEff;
+  //rho = (kEff - 1)/kEff;
   LAMBDA = 1/(nu*SIGMAf*v);
 //-----
 //-
   for i in 1:nPrecursor_par loop
     der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i];
-    //der(C[i]) = beta[i]/LAMBDA*denNneu - lambda[i]*C[i];
+    //der(C[i]) = beta[i]/LAMBDA*denNneu - lambda[i]*C[i] - C[i]*derVol/Vol;
+    nC[i]= C[i]*Vol;
     lambdaNC[i] = lambda[i]*nC[i];
     lambdaC[i] = lambda[i]*C[i];
-//-----
-    Crel0[i] = C[i]/C0[i];
-    nC[i]= C[i]*Vol;
   end for;
 //-
   betaTotal = sum(beta);
   SIGMA_lambdaC = sum(lambdaC);
   SIGMA_lambdaNC = sum(lambdaNC);
   
-  der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
+  der(Vol)= derVol;
   
-  der(denNneu)= ((rho - betaTotal)/LAMBDA)*denNneu + SIGMA_lambdaC;
+  //der(denNneu) = ((rho - betaTotal)/LAMBDA)*denNneu + SIGMA_lambdaC - denNneu/Vol*derVol;
   //nNeu = denNneu*Vol;
+  
+  //der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC - nNeu/Vol*derVol;
+  der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
+  denNneu = nNeu/Vol;
   
 //-----
   massFuel=massFuel0;
@@ -258,6 +268,9 @@ equation
   derNneuqNneu= der(nNeu)/nNeu;
   denNneuRel0 = denNneu/denNneu0;
   pwrRel0 = pwr/pwr0;
+  for i in 1:nPrecursor_par loop
+    Crel0[i] = C[i]/C0[i];
+  end for;
   rho_dollar= rho/betaTotal;
   rho_cent= rho_dollar*100.0;
   denPwr= pwr/Vol;

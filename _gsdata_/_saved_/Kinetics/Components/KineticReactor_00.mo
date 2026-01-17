@@ -221,6 +221,7 @@ equation
 //-
   for i in 1:nPrecursor_par loop
     der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i];
+    //der(C[i]) = beta[i]/LAMBDA*denNneu - lambda[i]*C[i];
     lambdaNC[i] = lambda[i]*nC[i];
     lambdaC[i] = lambda[i]*C[i];
 //-----
@@ -233,7 +234,9 @@ equation
   SIGMA_lambdaNC = sum(lambdaNC);
   
   der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
-  der(denNneu)= (((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC)/Vol;
+  
+  der(denNneu)= ((rho - betaTotal)/LAMBDA)*denNneu + SIGMA_lambdaC;
+  //nNeu = denNneu*Vol;
   
 //-----
   massFuel=massFuel0;

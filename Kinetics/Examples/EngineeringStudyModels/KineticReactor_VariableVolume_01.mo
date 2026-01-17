@@ -26,7 +26,7 @@ model KineticReactor_VariableVolume_01
     Placement(transformation(origin = {224, 113}, extent = {{-5, -5}, {5, 5}}, rotation = -90)));
   Modelica.Thermal.HeatTransfer.Sensors.HeatFlowSensor heatFlowSensor1 annotation(
     Placement(transformation(origin = {204, 84}, extent = {{5, -5}, {-5, 5}})));
-  Modelica.Blocks.Sources.Ramp ramp_rho1(duration = 1, height = 1, offset = 1, startTime = 5) annotation(
+  Modelica.Blocks.Sources.Ramp ramp_Vol(duration = 1, height = 1, offset = 1, startTime = 5) annotation(
     Placement(transformation(origin = {54, 122}, extent = {{-10, -10}, {10, 10}})));
   Modelica.Thermal.HeatTransfer.Sources.FixedTemperature fixedTemperature(T(displayUnit = "K") = 288.15)  annotation(
     Placement(transformation(origin = {250, 84}, extent = {{10, -10}, {-10, 10}}, rotation = -0)));
@@ -55,7 +55,7 @@ equation
     Line(points = {{209, 84}, {213, 84}}, color = {191, 0, 0}, thickness = 3));
   connect(convection.fluid, fixedTemperature.port) annotation(
     Line(points = {{234, 84}, {240, 84}}, color = {191, 0, 0}, thickness = 3));
-  connect(ramp_rho1.y, PtRctr.u_Vol) annotation(
+  connect(ramp_Vol.y, PtRctr.u_Vol) annotation(
     Line(points = {{66, 122}, {74, 122}, {74, 91}, {82, 91}}, color = {0, 0, 127}));
   annotation(
     Diagram(graphics = {Text(origin = {207, 46}, extent = {{-11, 4}, {11, -4}}, textString = "[MW]"), Text(origin = {180, 52}, extent = {{-14, 6}, {14, 0}}, textString = "Reactor power", horizontalAlignment = TextAlignment.Left), Text(origin = {177, 20}, extent = {{-19, 12}, {19, 0}}, textString = "Reactor power
