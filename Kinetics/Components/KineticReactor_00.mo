@@ -79,15 +79,15 @@ model KineticReactor_00
   
   Real PHI "neutron flux, 1/(m2*s)";
   units.NeutronNumberDensity denNneu;
+  units.Power denPwr "power density, W/m3";
+  Real C[nPrecursor_par] "precursor density";
+  units.NeutronNumberDensity lambdaC[nPrecursor_par];
+  units.NeutronNumberDensity SIGMA_lambdaC;
   
   
   
   //Real denNneuRel0 "denNneu/denNneu0";
-  //units.Power denPwr "power density, W/m3";
-  //Real C[nPrecursor_par] "precursor density";
   //Real Crel0[nPrecursor_par] "C/C0";
-  //units.NeutronNumberDensity lambdaC[nPrecursor_par];
-  //units.NeutronNumberDensity SIGMA_lambdaC;
   
   
   //---
@@ -224,14 +224,14 @@ equation
   for i in 1:nPrecursor_par loop
     //der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i];
     der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i] -nC[i]*derVol/Vol;
-    //der(C[i]) = beta[i]/LAMBDA*denNneu - lambda[i]*C[i] - C[i]*derVol/Vol;
-    //nC[i]= C[i]*Vol;
     lambdaNC[i] = lambda[i]*nC[i];
-    //lambdaC[i] = lambdaNC[i]/Vol;
+    //-
+    nC[i]= C[i]*Vol;
+    lambdaC[i] = lambdaNC[i]/Vol;
   end for;
 //-
   betaTotal = sum(beta);
-  //SIGMA_lambdaC = sum(lambdaC);
+  SIGMA_lambdaC = sum(lambdaC);
   SIGMA_lambdaNC = sum(lambdaNC);
   
   der(Vol)= derVol;
@@ -270,7 +270,7 @@ equation
   
   rho_dollar= rho/betaTotal;
   rho_cent= rho_dollar*100.0;
-  //denPwr= pwr/Vol;
+  denPwr= pwr/Vol;
   //denNneuRel0 = denNneu/denNneu0;
   
 //----------
