@@ -49,9 +49,7 @@ model KineticReactor_00
       internal objects
       -----------------------------------*/
   NuclearSystem.Constants.Common CmnConsts;
-  Real denNnukeFuel "num density of nuclear fuel";
   Real nNukeFuel "num of nuclei";
-  units.NeutronNumberDensity denNneu;
   Real nNeu "num of neutron";
   units.Time LAMBDA "neutron generation time";
   Real nu "average number of neutrons produced per fission";
@@ -60,7 +58,6 @@ model KineticReactor_00
   units.Velocity v "neutron velocity";
   Real rho "reactivity";
   //Real kEff;
-  Real PHI "neutron flux, 1/(m2*s)";
   units.Volume Vol "";
   units.Power pwr "power";
   units.Energy engy "";
@@ -71,21 +68,29 @@ model KineticReactor_00
   units.Mass massFuel;
   //---
   Real pwrRel0 "pwr/pwr0";
-  Real denNneuRel0 "denNneu/denNneu0";
-  Real Crel0[nPrecursor_par] "C/C0";
   Real derNneuqNneu "der(nNeu)/nNeu";
   //---
   Real beta[nPrecursor_par];
   Real betaTotal;
-  Real C[nPrecursor_par] "precursor density";
   Real nC[nPrecursor_par] "number of precursor";
   units.DecayConstant lambda[nPrecursor_par];
-  units.NeutronNumberDensity lambdaC[nPrecursor_par];
   Real lambdaNC[nPrecursor_par];
-  units.NeutronNumberDensity SIGMA_lambdaC;
   Real SIGMA_lambdaNC;
-  units.Power denPwr "power density, W/m3";
+  
   Real derVol "m3/s, time derivative of core volume";
+  Real denNnukeFuel "num density of nuclear fuel";
+  
+  
+  
+  //Real denNneuRel0 "denNneu/denNneu0";
+  //units.Power denPwr "power density, W/m3";
+  //Real C[nPrecursor_par] "precursor density";
+  //Real Crel0[nPrecursor_par] "C/C0";
+  //units.NeutronNumberDensity denNneu;
+  //Real PHI "neutron flux, 1/(m2*s)";
+  //units.NeutronNumberDensity lambdaC[nPrecursor_par];
+  //units.NeutronNumberDensity SIGMA_lambdaC;
+  
   
   //---
   /*-----------------------------------
@@ -126,10 +131,12 @@ protected
   parameter units.Volume Vol0(fixed=false) annotation(HideResult = false);
   parameter units.Mass massFuel0(fixed=false) annotation(HideResult = false);
   parameter units.Power denPwr0(fixed=false) "power density, W/m3" annotation(HideResult = false);
-  
+  parameter units.MacroscopicCrossSection SIGMAf0(fixed=false) "macroscopic fission cross section";
+
+//**********************************************************************
 initial equation
   denNnukeFuel= denNnukeFuel_par;
-  
+  SIGMAf0 = sigmaF_par*(denNnukeFuel*s_FuelDens_par);
   //----
   /**/
   if(use_u_Vol==true)then
@@ -147,47 +154,50 @@ initial equation
     denNneu0 = denNneu0_par; 
     PHI0 = denNneu0*v;
   end if;
-  //denNneu=denNneu0;
   
   //----
   massFuel0= Vol0*denMassFuel_par;
   nNeu0 = denNneu0*Vol0;
+  pwr0 = Efiss_par*SIGMAf0*v*nNeu;
+  
   
   //----
-  pwr0 = pwr;
-  denPwr0= denPwr;
+  denPwr0= pwr0/Vol0;
   LAMBDA0 = LAMBDA;
   nNeu0 = nNeu;
   rho0 = rho;
   Vol0=Vol;
   denNnukeFuel0= denNnukeFuel;
+  
   for i in 1:nPrecursor_par loop
-    C0[i]=C[i];
+    //C0[i]=C[i];
     nC0[i]=nC[i];
+    C0[i]=nC0[i];
   end for;
-  
-  //nNukeFuel0= denNnukeFuel0*Vol0;
-  //nNukeFuel0= nNukeFuel;
-  
-  
-  //----------
-  //for i in 1:nPrecursor_par loop
-    //der(C[i])=0.0;
-  //  der(nC[i])=0.0;
-  //end for;
   
   for i in 1:nPrecursor_par loop
     nC[i] = beta_par[i] / (LAMBDA0 * lambda_par[i]) * nNeu0;
   end for;
   
   //----
+  /*
   if(switchInit_derDenNneu==NuclearSystem.Types.Switches.switch_initialization.FixedInitial)then
     der(denNneu)=0.0;
   end if;
-  
+  */
   
 //**********************************************************************
 algorithm
+  /*
+  denNneu:= nNeu/Vol;
+  denNnukeFuel:= nNukeFuel/Vol;
+  
+  for i in 1:nPrecursor_par loop
+    C[i]:= nC[i]/Vol;
+  end for;
+  
+  denPwr:= pwr/Vol;
+  */
 //**********************************************************************
 equation
   //-----
@@ -230,23 +240,21 @@ equation
   for i in 1:nPrecursor_par loop
     der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i];
     //der(C[i]) = beta[i]/LAMBDA*denNneu - lambda[i]*C[i] - C[i]*derVol/Vol;
-    nC[i]= C[i]*Vol;
+    //nC[i]= C[i]*Vol;
     lambdaNC[i] = lambda[i]*nC[i];
-    lambdaC[i] = lambda[i]*C[i];
+    //lambdaC[i] = lambdaNC[i]/Vol;
   end for;
 //-
   betaTotal = sum(beta);
-  SIGMA_lambdaC = sum(lambdaC);
+  //SIGMA_lambdaC = sum(lambdaC);
   SIGMA_lambdaNC = sum(lambdaNC);
   
   der(Vol)= derVol;
   
-  //der(denNneu) = ((rho - betaTotal)/LAMBDA)*denNneu + SIGMA_lambdaC - denNneu/Vol*derVol;
-  //nNeu = denNneu*Vol;
-  
-  //der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC - nNeu/Vol*derVol;
   der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
-  denNneu = nNeu/Vol;
+  pwr = Efiss_par*SIGMAf*v*nNeu;
+
+  
   
 //-----
   massFuel=massFuel0;
@@ -254,9 +262,9 @@ equation
   
   nNukeFuel= denNnukeFuel*Vol;
   
-  PHI = denNneu*v;
-  pwr = Efiss_par*SIGMAf*PHI*Vol;
-  pwr = der(engy);
+  //PHI = denNneu*v;
+  //denNneu = nNeu/Vol;
+  der(engy) = pwr;
 //-----
   engy_TNTeq = engy/(4.184*10^9);
   if noEvent(0.0 < abs(rho-betaTotal)) then
@@ -266,14 +274,19 @@ equation
   end if;
 //-----
   derNneuqNneu= der(nNeu)/nNeu;
-  denNneuRel0 = denNneu/denNneu0;
   pwrRel0 = pwr/pwr0;
+  
+  /*
   for i in 1:nPrecursor_par loop
     Crel0[i] = C[i]/C0[i];
   end for;
+  */
+  
   rho_dollar= rho/betaTotal;
   rho_cent= rho_dollar*100.0;
-  denPwr= pwr/Vol;
+  //denPwr= pwr/Vol;
+  //denNneuRel0 = denNneu/denNneu0;
+  
 //----------
   annotation(
     defaultComponentName = "PtRctr",
