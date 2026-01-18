@@ -80,14 +80,15 @@ model KineticReactor_00
   Real derVol "m3/s, time derivative of core volume";
   Real denNnukeFuel "num density of nuclear fuel";
   
+  Real PHI "neutron flux, 1/(m2*s)";
+  units.NeutronNumberDensity denNneu;
+  
   
   
   //Real denNneuRel0 "denNneu/denNneu0";
   //units.Power denPwr "power density, W/m3";
   //Real C[nPrecursor_par] "precursor density";
   //Real Crel0[nPrecursor_par] "C/C0";
-  //units.NeutronNumberDensity denNneu;
-  //Real PHI "neutron flux, 1/(m2*s)";
   //units.NeutronNumberDensity lambdaC[nPrecursor_par];
   //units.NeutronNumberDensity SIGMA_lambdaC;
   
@@ -135,8 +136,8 @@ protected
 
 //**********************************************************************
 initial equation
-  denNnukeFuel= denNnukeFuel_par;
-  SIGMAf0 = sigmaF_par*(denNnukeFuel*s_FuelDens_par);
+  denNnukeFuel0= denNnukeFuel_par;
+  SIGMAf0 = sigmaF_par*(denNnukeFuel0*s_FuelDens_par);
   //----
   /**/
   if(use_u_Vol==true)then
@@ -144,7 +145,8 @@ initial equation
   else
     Vol0 = Vol_par;
   end if;
-  
+  //-
+  Vol=Vol0;
   
   //----
   if(switchCausal_PHI0==NuclearSystem.Types.Switches.switch_causal_neutronFlux.PHI2den)then
@@ -166,13 +168,11 @@ initial equation
   LAMBDA0 = LAMBDA;
   nNeu0 = nNeu;
   rho0 = rho;
-  Vol0=Vol;
-  denNnukeFuel0= denNnukeFuel;
+  denNnukeFuel= denNnukeFuel0;
   
   for i in 1:nPrecursor_par loop
-    //C0[i]=C[i];
     nC0[i]=nC[i];
-    C0[i]=nC0[i];
+    C0[i]=nC0[i]/Vol0;
   end for;
   
   for i in 1:nPrecursor_par loop
@@ -264,8 +264,8 @@ equation
   
   nNukeFuel= denNnukeFuel*Vol;
   
-  //PHI = denNneu*v;
-  //denNneu = nNeu/Vol;
+  PHI = denNneu*v;
+  denNneu = nNeu/Vol;
   der(engy) = pwr;
 //-----
   engy_TNTeq = engy/(4.184*10^9);
