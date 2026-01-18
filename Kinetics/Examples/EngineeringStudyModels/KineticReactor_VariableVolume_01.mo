@@ -2,7 +2,7 @@ within NuclearSystem.Kinetics.Examples.EngineeringStudyModels;
 
 model KineticReactor_VariableVolume_01
   extends Modelica.Icons.Example;
-  Kinetics.Components.KineticReactor_00 PtRctr(PHI0_par = 1e19, denNnukeFuel_par = 0.95*(18.71*10^6/238)*Constants.UnitConversions.factor_mole2num(), switchCausal_PHI0 = Types.Switches.switch_causal_neutronFlux.den2PHI, use_u_Vol = true, switchInit_derDenNneu = NuclearSystem.Types.Switches.switch_initialization.Free) annotation(
+  Kinetics.Components.KineticReactor_00 PtRctr(PHI0_par = 1e19, denNnukeFuel_par = 0.95*(18.71*10^6/238)*Constants.UnitConversions.factor_mole2num(), switchCausal_PHI0 = NuclearSystem.Types.Switches.switch_causal_neutronFlux.PHI2den, use_u_Vol = true, denNneu0_par = 1.5e21) annotation(
     Placement(transformation(origin = {101, 84}, extent = {{-17, -17}, {17, 17}})));
   Modelica.Blocks.Interaction.Show.RealValue realValue(significantDigits = 4) annotation(
     Placement(transformation(origin = {181, 46}, extent = {{-12, -10}, {12, 10}})));

@@ -36,12 +36,9 @@ model KineticReactor_00
       annotation (Dialog(tab="General", group="Switches"));
   
   //-------------------------
-  parameter NuclearSystem.Types.Switches.switch_initialization switchInit_derDenNneu= NuclearSystem.Types.Switches.switch_initialization.Free annotation (Dialog(tab="Initialization", group="Switches"));
   
   parameter NuclearSystem.Types.Switches.switch_causal_neutronFlux switchCausal_PHI0= NuclearSystem.Types.Switches.switch_causal_neutronFlux.den2PHI annotation (Dialog(group="Switches"));
   
-  
-  parameter Real der_denNneu0_par = 0.0 if switchInit_derDenNneu==NuclearSystem.Types.Switches.switch_initialization.FixedInitial "initial der(neutron density)" annotation (Dialog(tab="Initialization", group="Initial"));
   
   
   
@@ -57,7 +54,7 @@ model KineticReactor_00
   units.MacroscopicCrossSection SIGMAf "macroscopic fission cross section";
   units.Velocity v "neutron velocity";
   Real rho "reactivity";
-  //Real kEff;
+  Real kEff;
   units.Volume Vol "";
   units.Power pwr "power";
   units.Energy engy "";
@@ -146,7 +143,7 @@ initial equation
     Vol0 = Vol_par;
   end if;
   //-
-  Vol=Vol0;
+  rho0=u_rho;
   
   //----
   if(switchCausal_PHI0==NuclearSystem.Types.Switches.switch_causal_neutronFlux.PHI2den)then
@@ -160,44 +157,31 @@ initial equation
   //----
   massFuel0= Vol0*denMassFuel_par;
   nNeu0 = denNneu0*Vol0;
-  pwr0 = Efiss_par*SIGMAf0*v*nNeu;
-  
+  pwr0 = Efiss_par*SIGMAf0*v_par*nNeu0;
+  LAMBDA0 = 1/(nu_par*SIGMAf0*v_par);
+  denPwr0= pwr0/Vol0;
   
   //----
-  denPwr0= pwr0/Vol0;
-  LAMBDA0 = LAMBDA;
-  nNeu0 = nNeu;
-  rho0 = rho;
+  nNeu= nNeu0;
+  rho= rho0;
   denNnukeFuel= denNnukeFuel0;
+  Vol=Vol0;
   
+  //-
   for i in 1:nPrecursor_par loop
     nC0[i]=nC[i];
     C0[i]=nC0[i]/Vol0;
   end for;
-  
+  //-
   for i in 1:nPrecursor_par loop
     nC[i] = beta_par[i] / (LAMBDA0 * lambda_par[i]) * nNeu0;
   end for;
+  //-
   
-  //----
-  /*
-  if(switchInit_derDenNneu==NuclearSystem.Types.Switches.switch_initialization.FixedInitial)then
-    der(denNneu)=0.0;
-  end if;
-  */
   
 //**********************************************************************
 algorithm
-  /*
-  denNneu:= nNeu/Vol;
-  denNnukeFuel:= nNukeFuel/Vol;
   
-  for i in 1:nPrecursor_par loop
-    C[i]:= nC[i]/Vol;
-  end for;
-  
-  denPwr:= pwr/Vol;
-  */
 //**********************************************************************
 equation
   //-----
@@ -233,7 +217,7 @@ equation
   end if;
 //----------
   SIGMAf = sigmaF_par*(denNnukeFuel*s_FuelDens_par);
-  //rho = (kEff - 1)/kEff;
+  rho = (kEff - 1)/kEff;
   LAMBDA = 1/(nu*SIGMAf*v);
 //-----
 //-
