@@ -238,7 +238,8 @@ equation
 //-----
 //-
   for i in 1:nPrecursor_par loop
-    der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i];
+    //der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i];
+    der(nC[i]) = beta[i]/LAMBDA*nNeu - lambda[i]*nC[i] -nC[i]*derVol/Vol;
     //der(C[i]) = beta[i]/LAMBDA*denNneu - lambda[i]*C[i] - C[i]*derVol/Vol;
     //nC[i]= C[i]*Vol;
     lambdaNC[i] = lambda[i]*nC[i];
@@ -251,7 +252,8 @@ equation
   
   der(Vol)= derVol;
   
-  der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
+  //der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC;
+  der(nNeu) = ((rho - betaTotal)/LAMBDA)*nNeu + SIGMA_lambdaNC - nNeu*derVol/Vol;
   pwr = Efiss_par*SIGMAf*v*nNeu;
 
   
