@@ -77,17 +77,16 @@ model KineticReactor_00
   Real derVol "m3/s, time derivative of core volume";
   Real denNnukeFuel "num density of nuclear fuel";
   
+  //
   Real PHI "neutron flux, 1/(m2*s)";
   units.NeutronNumberDensity denNneu;
   units.Power denPwr "power density, W/m3";
   Real C[nPrecursor_par] "precursor density";
   units.NeutronNumberDensity lambdaC[nPrecursor_par];
   units.NeutronNumberDensity SIGMA_lambdaC;
+  Real denNneuRel0 "denNneu/denNneu0";
+  Real Crel0[nPrecursor_par] "C/C0";
   
-  
-  
-  //Real denNneuRel0 "denNneu/denNneu0";
-  //Real Crel0[nPrecursor_par] "C/C0";
   
   
   //---
@@ -262,16 +261,16 @@ equation
   derNneuqNneu= der(nNeu)/nNeu;
   pwrRel0 = pwr/pwr0;
   
-  /*
+  /**/
   for i in 1:nPrecursor_par loop
     Crel0[i] = C[i]/C0[i];
   end for;
-  */
+  //-
   
   rho_dollar= rho/betaTotal;
   rho_cent= rho_dollar*100.0;
   denPwr= pwr/Vol;
-  //denNneuRel0 = denNneu/denNneu0;
+  denNneuRel0 = denNneu/denNneu0;
   
 //----------
   annotation(
