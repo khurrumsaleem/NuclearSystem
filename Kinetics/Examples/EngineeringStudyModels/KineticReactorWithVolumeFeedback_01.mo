@@ -10,7 +10,7 @@ model KineticReactorWithVolumeFeedback_01
     Placement(transformation(origin = {89, 68}, extent = {{-4, -4}, {4, 4}}, rotation = -90)));
   Modelica.Blocks.Interaction.Show.RealValue realValue_pwr(significantDigits = 4) annotation(
     Placement(transformation(origin = {123, 14}, extent = {{-17, -9}, {17, 9}})));
-  NuclearSystem.Kinetics.Components.dVolByThermalLinearExpansion dVThExp annotation(
+  NuclearSystem.Kinetics.Components.dVolByThermalLinearExpansion_00 dVThExp(VolRef_par = 1)  annotation(
     Placement(transformation(origin = {54, 130}, extent = {{10, -10}, {-10, 10}})));
   Modelica.Thermal.HeatTransfer.Components.HeatCapacitor heatCapacitor2(C = (10400)*(0.3), T(start = 1873.15, displayUnit = "degC")) annotation(
     Placement(transformation(origin = {178, 94}, extent = {{-10, -10}, {10, 10}})));
