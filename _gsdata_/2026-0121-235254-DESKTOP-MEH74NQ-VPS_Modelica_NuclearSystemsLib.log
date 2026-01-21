@@ -1,0 +1,73 @@
+2026-01-21 23:52:55: Server: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.14
+2026-01-21 23:52:55: Server KEXes: sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,ext-info-s,kex-strict-s-v00@openssh.com
+2026-01-21 23:52:55: Server Host Keys: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
+2026-01-21 23:52:55: Chosen Host Key: ssh-ed25519
+2026-01-21 23:52:55: Ciphers: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+2026-01-21 23:52:55: MACs: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
+2026-01-21 23:52:55: Auth: start: publickey
+2026-01-21 23:52:55: Auth: publickey: no keys available
+2026-01-21 23:52:55: Auth: start: password
+2026-01-21 23:52:56: -- Analysis Started by On File Change, After Delay
+2026-01-21 23:52:57: Changes: 24, Conflicts: 0, CopyTime: 0, FixState: 0, Errors: 0, All: 3923
+2026-01-21 23:52:57: Left to Right: Copy File: 24 
+2026-01-21 23:52:57: == Sync Started by On File Change, After Delay
+2026-01-21 23:52:57: ConnectCloned connected to file:///~grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-21 23:52:57: ConnectCloned connected to file:///~grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-21 23:52:57: ConnectCloned connected to file:///~grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-21 23:52:57: Server: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.14
+2026-01-21 23:52:57: Server: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.14
+2026-01-21 23:52:57: Server: SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13.14
+2026-01-21 23:52:57: Server KEXes: sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,ext-info-s,kex-strict-s-v00@openssh.com
+2026-01-21 23:52:57: Server Host Keys: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
+2026-01-21 23:52:57: Chosen Host Key: ssh-ed25519
+2026-01-21 23:52:57: Ciphers: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+2026-01-21 23:52:57: MACs: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
+2026-01-21 23:52:57: Server KEXes: sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,ext-info-s,kex-strict-s-v00@openssh.com
+2026-01-21 23:52:57: Server Host Keys: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
+2026-01-21 23:52:57: Chosen Host Key: ssh-ed25519
+2026-01-21 23:52:57: Ciphers: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+2026-01-21 23:52:57: MACs: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
+2026-01-21 23:52:57: Server KEXes: sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group16-sha512,diffie-hellman-group18-sha512,diffie-hellman-group14-sha256,ext-info-s,kex-strict-s-v00@openssh.com
+2026-01-21 23:52:57: Server Host Keys: rsa-sha2-512,rsa-sha2-256,ecdsa-sha2-nistp256,ssh-ed25519
+2026-01-21 23:52:57: Chosen Host Key: ssh-ed25519
+2026-01-21 23:52:57: Ciphers: chacha20-poly1305@openssh.com,aes128-ctr,aes192-ctr,aes256-ctr,aes128-gcm@openssh.com,aes256-gcm@openssh.com
+2026-01-21 23:52:57: MACs: umac-64-etm@openssh.com,umac-128-etm@openssh.com,hmac-sha2-256-etm@openssh.com,hmac-sha2-512-etm@openssh.com,hmac-sha1-etm@openssh.com,umac-64@openssh.com,umac-128@openssh.com,hmac-sha2-256,hmac-sha2-512,hmac-sha1
+2026-01-21 23:52:57: Auth: start: publickey
+2026-01-21 23:52:57: Auth: publickey: no keys available
+2026-01-21 23:52:57: Auth: start: password
+2026-01-21 23:52:57: Auth: start: publickey
+2026-01-21 23:52:57: Auth: publickey: no keys available
+2026-01-21 23:52:57: Auth: start: password
+2026-01-21 23:52:57: Auth: start: publickey
+2026-01-21 23:52:57: Auth: publickey: no keys available
+2026-01-21 23:52:57: Auth: start: password
+2026-01-21 23:52:58: GsConnectAndSetRoot1 connected to sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-21 23:52:58: GsConnectAndSetRoot1 connected to sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-21 23:52:58: GsConnectAndSetRoot1 connected to sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem
+2026-01-21 23:52:58: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Dynamics/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Dynamics/package.order' (0)
+2026-01-21 23:52:58: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Constants/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Constants/package.order' (52)
+2026-01-21 23:52:58: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Constants/UnitConversions/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Constants/UnitConversions/package.order' (69)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Icons/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Icons/package.order' (37)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Interface/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Interface/package.order' (21)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/package.order' (67)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/BaseClasses/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/BaseClasses/package.order' (0)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Components/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Components/package.order' (131)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Components/ExtremeFastFission/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Components/ExtremeFastFission/package.order' (167)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Components/ExtremeFastFission/BaseClasses/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Components/ExtremeFastFission/BaseClasses/package.order' (64)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/package.order' (35)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/ComponentUsage/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/ComponentUsage/package.order' (365)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/EngineeringStudyModels/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/EngineeringStudyModels/package.order' (344)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/package.order' (100)
+2026-01-21 23:52:59: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/Temp/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/Temp/package.order' (38)
+2026-01-21 23:53:00: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/Test/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/Test/package.order' (106)
+2026-01-21 23:53:00: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/Tutorial/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Kinetics/Examples/Tutorial/package.order' (0)
+2026-01-21 23:53:00: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Types/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Types/package.order' (10)
+2026-01-21 23:53:00: Create Folder sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Utilities/UnitConversions
+2026-01-21 23:53:00: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Utilities/package.mo' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Utilities/package.mo' (104)
+2026-01-21 23:53:00: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Utilities/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Utilities/package.order' (37)
+2026-01-21 23:53:00: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Utilities/UnitConversions/package.mo' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Utilities/UnitConversions/package.mo' (117)
+2026-01-21 23:53:00: Copy New 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Utilities/UnitConversions/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Utilities/UnitConversions/package.order' (0)
+2026-01-21 23:53:00: Copy Over 'C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Types/Switches/package.order' -> 'sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/Types/Switches/package.order' (91)
+2026-01-21 23:53:00: Save State File C:/Users/grabacr/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/_gsdata_/_file_state_v4._gs
+2026-01-21 23:53:01: Save State File sftp://os3-310-44666.vs.sakura.ne.jp/home/ubuntu/VPSsync/01-WorkspaceSync/modelica-shared/CustomLib/NuclearSystem/_gsdata_/_file_state_v4._gs
+2026-01-21 23:53:12: == Sync Complete. Time: 00:00:15, Speed: 27.65 KB/s, OK: 24, Errors: 0
