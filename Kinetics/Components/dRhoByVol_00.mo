@@ -1,6 +1,6 @@
 within NuclearSystem.Kinetics.Components;
 
-model dRhoByVol_00
+block dRhoByVol_00
 
   /*-----------------------------------
       imports
@@ -14,9 +14,8 @@ model dRhoByVol_00
   /*-----------------------------------
       parameters
   -----------------------------------*/
-  parameter units.Temperature Tref_par=1873.15;
   parameter units.Volume VolRef_par=1.0;
-  parameter units.LinearExpansionCoefficient alphaL_par=10.94e-6;
+  parameter units.LinearExpansionCoefficient alphaVol_par=-5e-1;
   
   
   
@@ -24,14 +23,12 @@ model dRhoByVol_00
   /*-----------------------------------
       variables
   -----------------------------------*/
-  units.Volume VolRef;
-  units.Temperature Tref;
-  units.LinearExpansionCoefficient alphaL;
-  units.Volume dVol;
-  Real dVolqVolRef;
-  units.Temperature T;
-  units.Temperature dT;
-  units.Volume Vol;
+  units.Volume VolRef(start=VolRef_par);
+  units.LinearExpansionCoefficient alphaVol(start=alphaVol_par);
+  units.Volume dVol(start=0);
+  Real dVolqVolRef(start=0);
+  units.Volume Vol(start=1);
+  Real dRho(start=0);
   
   
   
@@ -48,25 +45,35 @@ initial equation
   /******************************
   ******************************/
   
+  
+  
+  //*********************************************
+algorithm
+  
+  
+  
+  //*********************************************
 equation
   /******************************
   ******************************/
-  Tref=Tref_par;
-  alphaL=alphaL_par;
+  alphaVol=alphaVol_par;
   VolRef= VolRef_par;
   
   
   /******************************
   ******************************/
-  T= u_Vol;
-  y_dRho= Vol;
+  Vol= u_Vol;
+  y_dRho= dRho;
   
   
   /******************************
   ******************************/
-  dT= T - Tref;
-  dVolqVolRef= 3*alphaL*dT;
-  dVol= dVolqVolRef*VolRef;
-  Vol=VolRef + dVol;
+  dVol= Vol - VolRef;
+  dVolqVolRef= dVol/VolRef;
+  dRho= alphaVol*dVolqVolRef;
+  
+  
+  annotation(defaultComponentName = "dRhoBydVol",
+  Icon(graphics = {Text(origin = {0, -110}, extent = {{-120, 10}, {120, -10}}, textString = "%name"), Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}})}));
   
 end dRhoByVol_00;

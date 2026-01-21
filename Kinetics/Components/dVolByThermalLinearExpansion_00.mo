@@ -1,6 +1,6 @@
 within NuclearSystem.Kinetics.Components;
 
-model dVolByThermalLinearExpansion_00
+block dVolByThermalLinearExpansion_00
 
   /*-----------------------------------
       imports
@@ -24,14 +24,14 @@ model dVolByThermalLinearExpansion_00
   /*-----------------------------------
       variables
   -----------------------------------*/
-  units.Volume VolRef;
-  units.Temperature Tref;
-  units.LinearExpansionCoefficient alphaL;
-  units.Volume dVol;
-  Real dVolqVolRef;
-  units.Temperature T;
-  units.Temperature dT;
-  units.Volume Vol;
+  units.Volume VolRef(start=VolRef_par);
+  units.Temperature Tref(start=Tref_par);
+  units.LinearExpansionCoefficient alphaL(start=alphaL_par);
+  units.Volume dVol(start=0);
+  Real dVolqVolRef(start=0);
+  units.Temperature T(start=Tref_par);
+  units.Temperature dT(start=0);
+  units.Volume Vol(start=VolRef_par);
   
   
   
@@ -48,6 +48,11 @@ initial equation
   /******************************
   ******************************/
   
+  //*********************************************
+algorithm
+
+
+  //*********************************************
 equation
   /******************************
   ******************************/
@@ -68,5 +73,12 @@ equation
   dVolqVolRef= 3*alphaL*dT;
   dVol= dVolqVolRef*VolRef;
   Vol=VolRef + dVol;
+  
+  
+
+  
+  
+  annotation(defaultComponentName = "dVolByT",
+  Icon(graphics = {Text(origin = {0, -110}, extent = {{-120, 10}, {120, -10}}, textString = "%name"), Rectangle(fillColor = {255, 255, 255}, fillPattern = FillPattern.Solid, extent = {{-100, 100}, {100, -100}})}));
   
 end dVolByThermalLinearExpansion_00;
