@@ -1,3 +1,4 @@
+PtKnt_HighFluxHTGR_withThermalMass_01
 FissionExplosion_Cor_p_01
 FissionExplosion_Cor_vCoreExp_01
 FissionExplosionCorrelation_01
@@ -5,3 +6,6 @@ FissionExplosionDeviceCore_ex01
 FissionExplosionDeviceCore_ex02
 KineticReactor_VariableVolume_01
 KineticReactorWithVolumeFeedback_01
+KineticReactorWithVolumeFeedback_02
+KineticReactorWithVolTempFeedback_01
+KineticReactor_RapidCoreExpansion_01

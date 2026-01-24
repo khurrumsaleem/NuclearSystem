@@ -1,4 +1,7 @@
 KineticReactor_00
 KineticReactor_PromptNeutron_00
 ExtremeFastFission
-dVolByThermalLinearExpansion
+dVolByThermalLinearExpansion_00
+dRhoByVol_00
+dRhoByT_00
+ExpandingCoreByEnergyRelease_00
