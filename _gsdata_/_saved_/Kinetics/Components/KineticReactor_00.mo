@@ -22,7 +22,7 @@ model KineticReactor_00
   parameter units.Energy Efiss_par = 200*10^6*conv.factor_eV2J();
   parameter Real nu_par = 2.43 "average number of neutrons produced per fission";
   parameter units.Area sigmaF_par = 1.199*10^(-28) "microscopic fission cross section";
-  parameter units.Velocity v_par = CmnConsts.vNeuFree_Fission_1MeV "neutron velocity";
+  parameter units.Velocity v_par = 2000 "neutron velocity";
   parameter Integer nPrecursor_par = 6 "";
   parameter Real beta_par[nPrecursor_par] = {0.000215, 0.001424, 0.001274, 0.002568, 0.000748, 0.000273};
   parameter units.DecayConstant lambda_par[nPrecursor_par] = {0.0126, 0.0337, 0.139, 0.325, 1.13, 3.5};
